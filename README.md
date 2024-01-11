@@ -2,7 +2,7 @@
 
 This is the repository for the official implementation and project page of the paper [SPLiT: Single Portrait Lighting Estimation via a Tetrad of Face Intrinsics](https://www.computer.org/csdl/journal/tp/2024/02/10301699/1RFBJBi1aHS).
 
-## Project page | Paper | Data
+## [Project page](https://costrice.github.io/split/) | [Paper](https://camera.pku.edu.cn/Fei_TPAMI23.pdf) | Data
 
 ## Install
 
@@ -21,10 +21,10 @@ TBA
 If you find SPLiT useful for your work please cite:
 
 ```
-@article{Fei2023split,
+@article{split2023,
     author = {Fan Fei and Yean Cheng and Yongjie Zhu and Qian Zheng and Si Li and Gang Pan and Boxin Shi},
     journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
-    title = {SPLiT: Single Portrait Lighting Estimation via a Tetrad of Face Intrinsics},
+    title = {{SPLiT}: Single Portrait Lighting Estimation via a Tetrad of Face Intrinsics},
     year = {2024},
     volume = {46},
     number = {02},
