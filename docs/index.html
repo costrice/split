@@ -18,13 +18,15 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
-    <link rel="icon" href="./static/images/avatar.jpg">
+    <link rel="icon" href="./static/images/favicon.jpg">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="./static/js/fontawesome.all.min.js"></script>
     <script src="./static/js/bulma-carousel.min.js"></script>
     <script src="./static/js/bulma-slider.min.js"></script>
     <script src="./static/js/index.js"></script>
+    <script type="text/javascript" src="./static/js/LaTeXMathML.js"></script>
+    <link rel="stylesheet" type="text/css" href="./static/js/LaTeXMathML.standardarticle.css"/>
 </head>
 <body>
 
@@ -67,6 +69,7 @@
                 <div class="column has-text-centered">
                     <h1 class="title is-1 publication-title">SPLiT: Single Portrait Lighting Estimation via a Tetrad of
                         Face Intrinsics</h1>
+                    <h1 class="title is-3 publication-conference"> TPAMI 2024 </h1>
                     <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://costrice.github.io/">Fan Fei</a><sup>1#</sup>,
@@ -161,7 +164,7 @@
 <section class="hero teaser">
     <div class="container is-max-desktop">
         <div class="hero-body">
-            <img id="teaser" src="./static/images/teaser.png" style="width: 100%; height: auto;">
+            <img id="teaser" src="./static/images/teaser.png" style="width: 60%; height: auto;">
             </img>
             <h2 class="subtitle has-text-centered">
                 <span class="dnerf">SPLiT</span> estimates a tetrad of face intrinsics (diffuse
@@ -204,6 +207,33 @@
             </div>
         </div>
         <!--/ Abstract. -->
+
+        <!-- Pipeline. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-4">Pipeline</h2>
+                <img src='./static/images/pipeline.png'></img>
+                <div class="content has-text-justified">
+                    <p>
+                        The pipeline of SPLiT.
+                        The <b>tetrad intrinsic decomposition module</b> predicts the tetrad of face intrinsics $\{
+                        \mathbf{A}, \mathbf{N}, \mathbf{D}, \mathbf{S} \}$ from the input image $\mathbf{I}$ by cascaded
+                        networks, $f_{\rm AN}$ and $f_{\rm DS}$.
+                        The lighting-dependent shading $\{ \mathbf{D}, \mathbf{S} \}$ are distributed onto spherical
+                        representations $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$ using $\mathbf{N}$ as per-pixel
+                        indices.
+                        The <b>spherical lighting estimation module</b> takes $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$
+                        and the constant normal map $\mathbf{N}^\circ$ as input.
+                        Taking into account the different nature of HDR light sources and ambient lights, it first
+                        estimates light sources and the ambient lights by the light source network $f_{\rm src}$, then
+                        enriches realistic textures into the ambient environment by the ambient texture network $f_{\rm
+                        amb}$ and the discriminator $f_{\rm disc}$ via a generative adversarial network (GAN) framework.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--/ Pipeline. -->
+
     </div>
 </section>
 
@@ -231,15 +261,6 @@
 
 <footer class="footer">
     <div class="container">
-        <div class="content has-text-centered">
-            <a class="icon-link"
-               href="./static/videos/nerfies_paper.pdf">
-                <i class="fas fa-file-pdf"></i>
-            </a>
-            <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
         <div class="columns is-centered">
             <div class="column is-8">
                 <div class="content">
