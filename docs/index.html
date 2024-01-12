@@ -67,10 +67,10 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column has-text-centered">
-                    <h1 class="title is-1 publication-title">SPLiT: Single Portrait Lighting Estimation via a Tetrad of
+                    <h1 class="title is-3 publication-title">SPLiT: Single Portrait Lighting Estimation via a Tetrad of
                         Face Intrinsics</h1>
-                    <h1 class="title is-3 publication-conference"> TPAMI 2024 </h1>
-                    <div class="is-size-5 publication-authors">
+                    <h1 class="title is-4 publication-conference"> TPAMI 2023 (Early Access) </h1>
+                    <div class="is-size-6 publication-authors">
             <span class="author-block">
               <a href="https://costrice.github.io/">Fan Fei</a><sup>1#</sup>,
             </span>
@@ -164,7 +164,7 @@
 <section class="hero teaser">
     <div class="container is-max-desktop">
         <div class="hero-body">
-            <img id="teaser" src="./static/images/teaser.png" style="width: 60%; height: auto;">
+            <img id="teaser" src="./static/images/teaser.png" class="centered" style="width: 60%; height: auto;">
             </img>
             <h2 class="subtitle has-text-centered">
                 <span class="dnerf">SPLiT</span> estimates a tetrad of face intrinsics (diffuse
@@ -181,7 +181,7 @@
         <!-- Abstract. -->
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
-                <h2 class="title is-3">Abstract</h2>
+                <h2 class="title is-4">Abstract</h2>
                 <div class="content has-text-justified">
                     <p>
                         This paper proposes a novel pipeline to estimate a non-parametric environment map with high
@@ -218,21 +218,50 @@
                         The pipeline of SPLiT.
                         The <b>tetrad intrinsic decomposition module</b> predicts the tetrad of face intrinsics $\{
                         \mathbf{A}, \mathbf{N}, \mathbf{D}, \mathbf{S} \}$ from the input image $\mathbf{I}$ by cascaded
-                        networks, $f_{\rm AN}$ and $f_{\rm DS}$.
+                        networks, $f_\mathrm{AN}$ and $f_\mathrm{DS}$.
                         The lighting-dependent shading $\{ \mathbf{D}, \mathbf{S} \}$ are distributed onto spherical
                         representations $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$ using $\mathbf{N}$ as per-pixel
                         indices.
                         The <b>spherical lighting estimation module</b> takes $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$
                         and the constant normal map $\mathbf{N}^\circ$ as input.
                         Taking into account the different nature of HDR light sources and ambient lights, it first
-                        estimates light sources and the ambient lights by the light source network $f_{\rm src}$, then
-                        enriches realistic textures into the ambient environment by the ambient texture network $f_{\rm
-                        amb}$ and the discriminator $f_{\rm disc}$ via a generative adversarial network (GAN) framework.
+                        estimates light sources and the ambient lights by the light source network $f_\mathrm{src}$,
+                        then enriches realistic textures into the ambient environment by the ambient texture network
+                        $f_\mathrm{amb}$ and the discriminator $f_\mathrm{disc}$ via a generative adversarial network
+                        (GAN) framework.
                     </p>
                 </div>
             </div>
         </div>
         <!--/ Pipeline. -->
+
+        <!-- Dataset. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-4">Dataset</h2>
+                <div class="columns is-centered">
+                    <div class="column content">
+                        <div class="content is-centered has-text-centered">
+                            <p>SPLiT is trained and validated on a large-scale and high-quality synthetic face image
+                                dataset containing labels of intrinsic components and lighting. This dataset is built on
+                                the <a href="https://facescape.nju.edu.cn/">FaceScape</a> 3D face dataset.</p>
+                        </div>
+                        <img src="./static/images/synthetic_dataset.png" style="width: 100%; height: auto;"></img>
+                    </div>
+                    <div class="column content">
+                        <div class="content is-centered has-text-centered">
+                            <p>Comparisons are conducted on a test dataset containing real face images and corresponding
+                                ground-truth environment lighting, including <a
+                                        href="http://hdrdb.com/faces/">Laval Face&Lighting
+                                    database</a> and our newly captured dataset.</p>
+                        </div>
+                        <img src="./static/images/real_dataset.png" style="width: 100%; height: auto;"></img>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--/ Dataset. -->
 
     </div>
 </section>
