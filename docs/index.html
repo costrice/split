@@ -210,49 +210,53 @@
 
         <!-- Pipeline. -->
         <div class="columns is-centered has-text-centered">
-            <h2 class="title is-4">Pipeline</h2>
-            <img src='./static/images/pipeline.png'></img>
-            <div class="content has-text-justified">
-                <p>
-                    The pipeline of SPLiT.
-                    The <b>tetrad intrinsic decomposition module</b> predicts the tetrad of face intrinsics $\{
-                    \mathbf{A}, \mathbf{N}, \mathbf{D}, \mathbf{S} \}$ from the input image $\mathbf{I}$ by cascaded
-                    networks, $f_\mathrm{AN}$ and $f_\mathrm{DS}$.
-                    The lighting-dependent shading $\{ \mathbf{D}, \mathbf{S} \}$ are distributed onto spherical
-                    representations $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$ using $\mathbf{N}$ as per-pixel
-                    indices.
-                    The <b>spherical lighting estimation module</b> takes $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$
-                    and the constant normal map $\mathbf{N}^\circ$ as input.
-                    Taking into account the different nature of HDR light sources and ambient lights, it first
-                    estimates light sources and the ambient lights by the light source network $f_\mathrm{src}$,
-                    then enriches realistic textures into the ambient environment by the ambient texture network
-                    $f_\mathrm{amb}$ and the discriminator $f_\mathrm{disc}$ via a generative adversarial network
-                    (GAN) framework.
-                </p>
+            <div class="column is-full-width">
+                <h2 class="title is-4">Pipeline</h2>
+                <img src='./static/images/pipeline.png'></img>
+                <div class="content has-text-justified">
+                    <p>
+                        The pipeline of SPLiT.
+                        The <b>tetrad intrinsic decomposition module</b> predicts the tetrad of face intrinsics $\{
+                        \mathbf{A}, \mathbf{N}, \mathbf{D}, \mathbf{S} \}$ from the input image $\mathbf{I}$ by cascaded
+                        networks, $f_\mathrm{AN}$ and $f_\mathrm{DS}$.
+                        The lighting-dependent shading $\{ \mathbf{D}, \mathbf{S} \}$ are distributed onto spherical
+                        representations $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$ using $\mathbf{N}$ as per-pixel
+                        indices.
+                        The <b>spherical lighting estimation module</b> takes $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$
+                        and the constant normal map $\mathbf{N}^\circ$ as input.
+                        Taking into account the different nature of HDR light sources and ambient lights, it first
+                        estimates light sources and the ambient lights by the light source network $f_\mathrm{src}$,
+                        then enriches realistic textures into the ambient environment by the ambient texture network
+                        $f_\mathrm{amb}$ and the discriminator $f_\mathrm{disc}$ via a generative adversarial network
+                        (GAN) framework.
+                    </p>
+                </div>
             </div>
         </div>
         <!--/ Pipeline. -->
 
         <!-- Dataset. -->
         <div class="columns is-centered has-text-centered">
-            <h2 class="title is-4">Dataset</h2>
-            <div class="columns is-centered">
-                <div class="column content">
-                    <div class="content is-centered has-text-centered">
-                        <p>SPLiT is trained and validated on a large-scale and high-quality synthetic face image
-                            dataset containing labels of intrinsic components and lighting. This dataset is built on
-                            the <a href="https://facescape.nju.edu.cn/">FaceScape</a> 3D face dataset.</p>
+            <div class="column is-full-width">
+                <h2 class="title is-4">Dataset</h2>
+                <div class="columns is-centered">
+                    <div class="column content">
+                        <div class="content is-centered has-text-centered">
+                            <p>SPLiT is trained and validated on a large-scale and high-quality synthetic face image
+                                dataset containing labels of intrinsic components and lighting. This dataset is built on
+                                the <a href="https://facescape.nju.edu.cn/">FaceScape</a> 3D face dataset.</p>
+                        </div>
+                        <img src="./static/images/synthetic_dataset.png" style="width: 100%; height: auto;"></img>
                     </div>
-                    <img src="./static/images/synthetic_dataset.png" style="width: 100%; height: auto;"></img>
-                </div>
-                <div class="column content">
-                    <div class="content is-centered has-text-centered">
-                        <p>Comparisons are conducted on a test dataset containing real face images and corresponding
-                            ground-truth environment lighting, including <a
-                                    href="http://hdrdb.com/faces/">Laval Face&Lighting
-                                database</a> and our newly captured dataset.</p>
+                    <div class="column content">
+                        <div class="content is-centered has-text-centered">
+                            <p>Comparisons are conducted on a test dataset containing real face images and corresponding
+                                ground-truth environment lighting, including <a
+                                        href="http://hdrdb.com/faces/">Laval Face&Lighting
+                                    database</a> and our newly captured dataset.</p>
+                        </div>
+                        <img src="./static/images/real_dataset.png" style="width: 100%; height: auto;"></img>
                     </div>
-                    <img src="./static/images/real_dataset.png" style="width: 100%; height: auto;"></img>
                 </div>
             </div>
         </div>
@@ -260,20 +264,23 @@
 
         <!-- Comparisons. -->
         <div class="columns is-centered has-text-centered">
-            <h2 class="title is-4">Comparisons</h2>
-            <img src='./static/images/comparison.png'></img>
-            <div class="content has-text-justified">
-                <p>
-                    We compare SPLiT on lighting estimation against state-of-the-art methods.
-                    Lighting estimates from left to right:
-                    (a) ground truth, (b) SPLiT (ours), (c) SPLiT (ours) w/o
-                    $f_\mathrm{amb}$,
-                    (d) <a href="https://augmentedperception.github.io/facelight/">LIDP</a>,
-                    (e) <a href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Renjiao_Yi_Faces_as_Lighting_ECCV_2018_paper.pdf">FaceProbe</a>,
-                    (f) <a href="https://ieeexplore.ieee.org/document/9320328">HDRLE</a>,
-                    (g) <a href="https://ieeexplore.ieee.org/document/9431726">HyFRIS</a>.
-                    Some entries (indicated as “$\ominus$”) are unavailable.
-                </p>
+            <div class="column is-full-width">
+                <h2 class="title is-4">Comparisons</h2>
+                <img src='./static/images/comparison.png'></img>
+                <div class="content has-text-justified">
+                    <p>
+                        We compare SPLiT on lighting estimation against state-of-the-art methods.
+                        Lighting estimates from left to right:
+                        (a) ground truth, (b) SPLiT (ours), (c) SPLiT (ours) w/o
+                        $f_\mathrm{amb}$,
+                        (d) <a href="https://augmentedperception.github.io/facelight/">LIDP</a>,
+                        (e) <a
+                            href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Renjiao_Yi_Faces_as_Lighting_ECCV_2018_paper.pdf">FaceProbe</a>,
+                        (f) <a href="https://ieeexplore.ieee.org/document/9320328">HDRLE</a>,
+                        (g) <a href="https://ieeexplore.ieee.org/document/9431726">HyFRIS</a>.
+                        Some entries (indicated as “$\ominus$”) are unavailable.
+                    </p>
+                </div>
             </div>
         </div>
         <!--/ Comparisons. -->
