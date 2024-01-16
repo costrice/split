@@ -6,6 +6,8 @@
 # Modified by Ke Sun (sunk@mail.ustc.edu.cn)
 # ------------------------------------------------------------------------------
 
+# code borrowed from https://github.com/leoxiaobin/deep-high-resolution-net.pytorch
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

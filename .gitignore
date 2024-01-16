@@ -161,5 +161,10 @@ cython_debug/
 #.idea/
 
 
-lighting_estimation/checkpoints/
-lighting_estimation/BRDF_base/
+internal/3_lighting_estimation/checkpoints/
+internal/3_lighting_estimation/BRDF_base/
+/model_files/*
+/images/intrinsic/*
+/images/pre_processed/*
+/images/lighting/indoor/*
+/images/lighting/outdoor/*

@@ -92,7 +92,7 @@ function AMnoMathMLNote() {
   an.appendChild(document.createTextNode("LaTeXMathML"));
   an.setAttribute("href","http://www.maths.nott.ac.uk/personal/drw/lm.html");
   nd.appendChild(an);
-  nd.appendChild(document.createTextNode(" notation use Internet Explorer 6+")); 
+  nd.appendChild(document.createTextNode(" notation use Internet Explorer 6+"));
   an = AMcreateElementXHTML("a");
   an.appendChild(document.createTextNode("MathPlayer"));
   an.setAttribute("href","http://www.dessci.com/en/products/mathplayer/download.htm");
@@ -528,7 +528,7 @@ AMsqrt, AMnot, AMroot, AMfrac, AMover, AMsub, AMsup, AMtext, AMmbox, AMatop, AMc
 {input:"\\mathfrak",tag:"mstyle",atname:"mathvariant", atval:"fraktur",ttype:UNARY, codes:AMfrk},
 {input:"\\textcolor",tag:"mstyle",atname:"mathvariant", atval:"mathcolor", ttype:BINARY},
 {input:"\\colorbox",tag:"mstyle",atname:"mathvariant", atval:"background", ttype:BINARY}
-]; 
+];
 
 function compareNames(s1,s2) {
   if (s1.input > s2.input) return 1
@@ -907,9 +907,9 @@ function AMparseSexpr(str) { //parses str and returns [node,tailstr,(node)tag]
                               result[0].childNodes[i].firstChild.nodeValue);
               var newst = [];
               for (var j=0; j<st.length; j++)
-                if (st.charCodeAt(j)>64 && st.charCodeAt(j)<91) 
+                if (st.charCodeAt(j)>64 && st.charCodeAt(j)<91)
 				{  newst = newst + symbol.codes[st.charCodeAt(j)-65] }
-                   // String.fromCharCode(symbol.codes[st.charCodeAt(j)-65]); alert(newst); }
+                   // String.fromCharCode(symbol.internal[st.charCodeAt(j)-65]); alert(newst); }
                 else newst = newst + st.charAt(j);
               if (result[0].nodeName=="mi")
                 result[0]=AMcreateElementMathML("mo").
@@ -931,21 +931,21 @@ function AMparseSexpr(str) { //parses str and returns [node,tailstr,(node)tag]
     result2 = AMparseSexpr(result[1]);
     if (result2[0]==null) return [AMcreateMmlNode("mo",document.createTextNode(symbol.input)),str,null];
     //added by J. Knisley to allow \textcolor and \colorbox within equations
-    if (symbol.input=="\\textcolor" || symbol.input=="\\colorbox") { 
+    if (symbol.input=="\\textcolor" || symbol.input=="\\colorbox") {
       var tclr = str.match(/\{\s*([#\w]+)\s*\}/); //get's color from beginning of str
-      str = str.replace(/\{\s*[#\w]+\s*\}/,""); 
+      str = str.replace(/\{\s*[#\w]+\s*\}/,"");
       if(tclr!=null) {
          if(IsColorName.test(tclr[1].toLowerCase())) {
    	       tclr=LaTeXColor[tclr[1].toLowerCase()];
          } else {
            tclr=tclr[1]; // no checking for valid color!!
-         } 
+         }
          node = AMcreateElementMathML("mstyle");
          node.setAttribute(symbol.atval,tclr);
-         node.appendChild(result2[0]); 
-         return [node,result2[1],symbol.tag];  
-      } 
-    }  
+         node.appendChild(result2[0]);
+         return [node,result2[1],symbol.tag];
+      }
+    }
     if (symbol.input=="\\root" || symbol.input=="\\stackrel") newFrag.appendChild(result2[0]);
     newFrag.appendChild(result[0]);
     if (symbol.input=="\\frac") newFrag.appendChild(result2[0]);
@@ -1092,7 +1092,7 @@ function AMparseExpr(str,rightbracket,matrix) {
 
 function AMparseMath(str) {
   var result, node = AMcreateElementMathML("mstyle");
-  //added by J. Knisley to allow limited implementation of \color 
+  //added by J. Knisley to allow limited implementation of \color
   var cclr = str.match(/\\color\s*\{\s*([#\w]+)\s*\}/);
   str = str.replace(/\\color\s*\{\s*[#\w]+\s*\}/g,"");
   if(cclr!=null) {
@@ -1102,7 +1102,7 @@ function AMparseMath(str) {
         cclr=cclr[1]; // no checking for valid color!!
      }
      node.setAttribute("mathcolor",cclr);
-  } else { 
+  } else {
     if (mathcolor != "") node.setAttribute("mathcolor",mathcolor);
   };
   if (mathfontfamily != "") node.setAttribute("fontfamily",mathfontfamily);
@@ -1306,7 +1306,7 @@ LaTeXColor["white"]          = "#FFFFFF";
 
 var IsColorName = /^(?:greenyellow|yellow|goldenrod|dandelion|apricot|peach|melon|yelloworange|orange|burntorange|bittersweet|redorange|mahogany|maroon|brickred|red|orangered|rubinered|wildstrawberry|salmon|carnationpink|magenta|violetred|rhodamine|mulberry|redviolet|fuchsia|lavender|thistle|orchid|darkorchid|purple|plum|violet|royalpurple|blueviolet|periwinkle|cadetblue|cornflowerblue|midnightblue|navyblue|royalblue|blue|cerulean|cyan|processblue|skyblue|turquoise|tealblue|aquamarine|bluegreen|emerald|junglegreen|seagreen|green|forestgreen|pinegreen|limegreen|yellowgreen|springgreen|olivegreen|rawsienna|sepia|brown|tan|gray|grey|black|white)$/;
 var IsCounter =  /^(?:definition|proposition|lemma|theorem|corollary|example|exercise|subsection|subsubsection|figure|equation|table)$/ ;
-var IsLaTeXElement = /^(?:displayequation|title|author|address|date|abstract|keyword|section|subsection|subsubsection|ref|cite|thebibliography|definition|proposition|lemma|theorem|corollary|example|exercise|itemize|enumerate|enddefinition|endproposition|endlemma|endtheorem|endcorollary|endexample|endexercise|enditemize|endenumerate|LaTeXMathMLlabel|LaTeXMathML|smallskip|medskip|bigskip|quote|quotation|endquote|endquotation|center|endcenter|description|enddescription|inlinemath)$/; 
+var IsLaTeXElement = /^(?:displayequation|title|author|address|date|abstract|keyword|section|subsection|subsubsection|ref|cite|thebibliography|definition|proposition|lemma|theorem|corollary|example|exercise|itemize|enumerate|enddefinition|endproposition|endlemma|endtheorem|endcorollary|endexample|endexercise|enditemize|endenumerate|LaTeXMathMLlabel|LaTeXMathML|smallskip|medskip|bigskip|quote|quotation|endquote|endquotation|center|endcenter|description|enddescription|inlinemath)$/;
 var IsTextOnlyArea = /^(?:form|textarea|pre)$/i;
 var tableid = 0;
 
@@ -1315,10 +1315,10 @@ function makeNumberString(cntr) {
      if(inAppendix) {
         return "A"+sectionCntr+"."+cntr;
      } else {
-	return sectionCntr+"."+cntr;   
+	return sectionCntr+"."+cntr;
      }
   } else {
-     return ""+cntr;	     
+     return ""+cntr;
   }
 };
 
@@ -1326,30 +1326,30 @@ function makeNumberString(cntr) {
 function LaTeXpreProcess(thebody) {
    var TheBody = thebody;
    if(TheBody.hasChildNodes()) {
-      if(!(IsLaTeXElement.test(TheBody.className))) 
+      if(!(IsLaTeXElement.test(TheBody.className)))
       {
-         for(var i=0; i<TheBody.childNodes.length; i++) { 
+         for(var i=0; i<TheBody.childNodes.length; i++) {
             LaTeXpreProcess(TheBody.childNodes[i])  }
-      }	     
-   } 
-   else { 
-      if(  TheBody.nodeType==3 &&  
-	  !(IsTextOnlyArea.test(TheBody.parentNode.nodeName) ) ) 
+      }
+   }
+   else {
+      if(  TheBody.nodeType==3 &&
+	  !(IsTextOnlyArea.test(TheBody.parentNode.nodeName) ) )
       {
          var str = TheBody.nodeValue;
-         if( !(str==null)) { 
-            
+         if( !(str==null)) {
+
 	        str = str.replace(/\\%/g, "<per>"); // % sign
 	        str = str.replace(/%[^\n]*(?=\n)/g,"");
 	        str = str.replace(/%[^\r]*(?=\r)/g,""); //Used by Explorer
-	        str = str.replace(/%[^\n]*$/,"") // End of text segment comment 
+	        str = str.replace(/%[^\n]*$/,"") // End of text segment comment
 
 	        if(isIE && str.match(/%/g) != null && IEcommentWarning) {
 	           alert("Comments may not have parsed properly.  Try putting in <pre class='LaTeX><div>..</div></pre> structure.");
 	           IEcommentWarning = false;
 	        }
 	        str = str.replace(/<per>/g,"%");
-	        
+
 	        //if(str.match(/XXX[\s\S]*/)!=null) {
 	        //  var tmp = str.match(/XXX[\s\S]*/)[0];
 	        //  var tmpstr = tmp.charCodeAt(7)+"::"+tmp.charCodeAt(8)+"::"+tmp.charCodeAt(9)+"::"+tmp.charCodeAt(10)+"::"+tmp.charCodeAt(11)+"::"+tmp.charCodeAt(12)+"::"+tmp.charCodeAt(13);
@@ -1358,8 +1358,8 @@ function LaTeXpreProcess(thebody) {
 
             //spacing that in LaTeXMathML may cause problems because of our approach. We use purely unicode
            //  First we remove singleton / symbols
-            str = str.replace(/([^\\])\\(\s)/g,"$1\u00A0$2"); // must be a space after \ for it to make an nbsp        
- 
+            str = str.replace(/([^\\])\\(\s)/g,"$1\u00A0$2"); // must be a space after \ for it to make an nbsp
+
             str = str.replace(/\\quad/g,"\u2001");
             str = str.replace(/\\qquad/g,"\u2001\u2001");
             str = str.replace(/\\enspace/g,"\u2002");
@@ -1369,18 +1369,18 @@ function LaTeXpreProcess(thebody) {
             str = str.replace(/\\thinspace/g,"\u200A");
             str = str.replace(/([^\\])~/g,"$1\u00A0");
             str = str.replace(/\\~/g,"~");
-		 
-            //Added \[ ... \] and $$..$$ functionality.  
+
+            //Added \[ ... \] and $$..$$ functionality.
             str = str.replace(/\\\[/g," <DEQ> $\\displaystyle{");
             str = str.replace(/\\\]/g,"}$ <DEQ> ");
             str = str.replace(/\$\$/g,"${$<DEQ>$}$");
-            
-            // Separate replacements for begin .. end to (eventually) allow LaTeX equations with html codes mixed in 
+
+            // Separate replacements for begin .. end to (eventually) allow LaTeX equations with html internal mixed in
             // (as is the case for theorem, etc.
             // all variations of spaces with \begin{array} .. \end{array} -- not displayed, however
             str = str.replace(/\\begin\s*\{\s*array\s*\}/g,"\\begin{array}");
             str = str.replace(/\\end\s*\{\s*array\s*\}/g,"\\end{array}");
-           
+
             // all variations of spaces with \begin{eqnarray} .. \end{eqnarray}
             str = str.replace(/\\begin\s*\{\s*eqnarray\s*\}/g,"  <DEQ>eqno$\\begin{eqnarray}");
             str = str.replace(/\\end\s*\{\s*eqnarray\s*\}/g,"\\end{eqnarray}$<DEQ>  ");
@@ -1392,57 +1392,57 @@ function LaTeXpreProcess(thebody) {
             // all variations of spaces with \begin{displaymath} .. \end{displaymath}
             str = str.replace(/\\begin\s*\{\s*displaymath\s*\}/g," <DEQ> $\\displaystyle{");
             str = str.replace(/\\end\s*\{\s*displaymath\s*\}/g,"}$ <DEQ> ");
-            
+
             // all variations of spaces with \begin{equation*} .. \end{equation*}
             str = str.replace(/\\begin\s*\{\s*equation\s*\*\s*\}/g," <DEQ> $\\displaystyle{");
             str = str.replace(/\\end\s*\{\s*equation\s*\*\s*\}/g,"}$ <DEQ> ");
-  
+
              // all variations of spaces with \begin{equation} .. \end{equation}
             str = str.replace(/\\begin\s*\{\s*equation\s*\}/g," <DEQ>eqno$\\displaystyle{");
             str = str.replace(/\\end\s*\{\s*equation\s*\}/g,"}$ <DEQ> ");
-	    
 
-	    
+
+
             //now parse to translate <DEQ> structures to <table class = 'dispeq'> stuff
-            //and to identify non-display math content (sections, etc).  
-             
+            //and to identify non-display math content (sections, etc).
+
             str = str.split("<DEQ>");
             // var ntype = TheBody.nodeType;
             var newFrag = document.createDocumentFragment();
-	     
+
             for(var i=0;i<str.length;i++) {
-               if(i % 2) { 
+               if(i % 2) {
                   //odd = table of type displayequation
                   var DEQtable = document.createElement("table");
                   DEQtable.className='displayequation';
                   var DEQtbody = document.createElement("tbody");
-                   
+
                   var DEQtr = document.createElement("tr");
                   var DEQtdeq = document.createElement("td");
                       DEQtdeq.className='eq';
-                   
-                  // AfterFix to repair for $$...$$   
+
+                  // AfterFix to repair for $$...$$
                   str[i] = str[i].replace(/\$\}\$/g,"$\\displaystyle{");
                   str[i] = str[i].replace(/\$\{\$/g,"}");
-		                                     
+
                   //check for equation number via either label or eqno at beginning -- \nonumber is removed
                   var lbl = str[i].match(/\\label\s*\{\s*(\w+)\s*\}/);
                   var ISeqno = str[i].match(/^eqno/);
-                   
-                  // append nodes into row                 
+
+                  // append nodes into row
                   str[i] = str[i].replace(/^eqno/," ");
                   str[i] = str[i].replace(/\\label\s*\{\s*\w+\s*\}/," ");
                   DEQtdeq.appendChild(document.createTextNode( str[i] ) );
                   DEQtr.appendChild(DEQtdeq);
 
                   str[i] = str[i].replace(/\\nonumber/g,"");
-                  
+
                   if(ISeqno!=null || lbl !=null) {
                      var DEQtdno = document.createElement("td");
                          DEQtdno.className='eqno';
                      LaTeXCounter["equation"]++;
 		             var eqnoString = makeNumberString(LaTeXCounter["equation"]);
-                     
+
 		             var DEQanchor = document.createElement("a");
 		             if(lbl!=null) { DEQanchor.id = lbl[1] };
 		             DEQanchor.className = "eqno";
@@ -1452,23 +1452,23 @@ function LaTeXpreProcess(thebody) {
 		             anchorSpan.appendChild(document.createTextNode(eqnoString));
 		             DEQanchor.appendChild(anchorSpan);
                      DEQtdno.appendChild(DEQanchor);
-		             var DEQspan = document.createElement("span"); 
-		             DEQspan.className = "eqno"; 
-		             DEQspan.appendChild(document.createTextNode("("+eqnoString+")" )); 
-                     DEQtdno.appendChild(DEQspan); 
+		             var DEQspan = document.createElement("span");
+		             DEQspan.className = "eqno";
+		             DEQspan.appendChild(document.createTextNode("("+eqnoString+")" ));
+                     DEQtdno.appendChild(DEQspan);
                      DEQtr.appendChild(DEQtdno);
                   }
                   DEQtbody.appendChild(DEQtr);
 		          DEQtable.appendChild(DEQtbody);
                   newFrag.appendChild(DEQtable);
-               } 
-               else { 
-                  //even = this is text, where we may have sections, labels, subsections, and so on 
- 
-                  // AfterFix to repair for $$...$$   
+               }
+               else {
+                  //even = this is text, where we may have sections, labels, subsections, and so on
+
+                  // AfterFix to repair for $$...$$
                   str[i] = str[i].replace(/\$\}\$/g,"");
                   str[i] = str[i].replace(/\$\{\$/g,"");
-			  
+
 		          //Some stuff we just want to remove
                   str[i] = str[i].replace(/\\maketitle/g,"");
                   str[i] = str[i].replace(/\\begin\s*\{\s*document\s*\}/g,"");
@@ -1477,13 +1477,13 @@ function LaTeXpreProcess(thebody) {
 		          str[i] = str[i].replace(/\\usepackage[^\}]*?\}/g,""); //ignores packages and their options
 		          str[i] = str[i].replace(/\\noindent/g,"");
 		          str[i] = str[i].replace(/\\notag/g,"");
-                          		 
+
                   //Next: labels, ref's, hrefs, urls, and cites
                   str[i] = str[i].replace(/\\ref\s*\{\s*(\w+)\}/g," \\[ref\\]$1\\[ ");
 		          str[i] = str[i].replace (/\\url\s*\{\s*([^\}\n]+)\}/g," \\[url\\]$1\\[ ");
                   str[i] = str[i].replace(/\\href\s*\{\s*([^\}]+)\}\s*\{\s*([^\}]+)\}/g," \\[href\\]$1\\]$2\\[ ");
                   str[i] = str[i].replace(/\\cite\s*\{\s*(\w+)\}/g," \\[cite\\]$1\\[ ");
-		  
+
 		          //Miscellaneous stuff!!
 		          str[i] = str[i].replace(/\\qed/g,"\u220E");
 		          str[i] = str[i].replace(/\\endproof/g,"\u220E");
@@ -1493,7 +1493,7 @@ function LaTeXpreProcess(thebody) {
 	              str[i] = str[i].replace(/\\n(?=\s)/g, " \\[br\\] \\[ ");
 		          str[i] = str[i].replace(/\\newline/g," \\[br\\] \\[ ");
 		          str[i] = str[i].replace(/\\linebreak/g," \\[br\\] \\[ ");
-               	  str[i] = str[i].replace(/\\smallskip/g," \\[logicalbreak\\]smallskip\\[ "); 
+               	  str[i] = str[i].replace(/\\smallskip/g," \\[logicalbreak\\]smallskip\\[ ");
 	              str[i] = str[i].replace(/\\medskip/g," \\[logicalbreak\\]medskip\\[ ");
 	              str[i] = str[i].replace(/\\bigskip/g," \\[logicalbreak\\]bigskip\\[ ");
 		          str[i] = str[i].replace(/[\n\r]+[ \f\n\r\t\v\u2028\u2029]*[\n\r]+/g," \\[logicalbreak\\]LaTeXMathML\\[ ");  // extra return replaced by <p>
@@ -1501,7 +1501,7 @@ function LaTeXpreProcess(thebody) {
 		             str[i] = str[i].replace(/\r/g," ");  // replace \r by a space to aid spacing!
 		          }
 
-		  
+
 		          //items and appendix
 		          str[i] = str[i].replace(/\\bibitem\s*([^\{]*\{\s*\w*\s*\})/g," \\[bibitem\\]$1\\[ ");
                   str[i] = str[i].replace(/\\bibitem\s*/g," \\[bibitem\\] \\[ ");
@@ -1516,121 +1516,121 @@ function LaTeXpreProcess(thebody) {
                   str[i] = str[i].replace(/\\begin\s*\{\s*table\s*\}([\s\S]+?)\\end\s*\{\s*table\s*\}/g," \\[table\\]$1\\[ ");
 		          //str[i] = str[i].replace(/\\begin\s*\{\s*array\s*\}([\s\S]+?)\\end\s*\{\s*array\s*\}/g," \\[array\\]$1\\[ ");
                   //goal is to protect array \\ from being converted into linebreaks
-                  
-                  //This construction allows css classes for divs for these elements, but the CSS will have to be supplied through a 
+
+                  //This construction allows css classes for divs for these elements, but the CSS will have to be supplied through a
                   //css file or <script> .. </script> in the header.  (It makes sense to me that style files in LaTeX should correspond
                   //to css and/or xslt when translating to mathml, but \ref's are a problem).
-                  str[i] = str[i].replace(/\\begin\s*\{\s*theorem\s*\}/g," \\[theorem\\]Theorem \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*theorem\s*\}/g," \\[theorem\\]Theorem \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*theorem\s*\}/g," \\[endtheorem\\] \\[ ");
 
-                  str[i] = str[i].replace(/\\begin\s*\{\s*definition\s*\}/g," \\[definition\\]Definition \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*definition\s*\}/g," \\[definition\\]Definition \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*definition\s*\}/g," \\[enddefinition\\] \\[ ");
-           
-                  str[i] = str[i].replace(/\\begin\s*\{\s*lemma\s*\}/g," \\[lemma\\]Lemma \\[ "); 
+
+                  str[i] = str[i].replace(/\\begin\s*\{\s*lemma\s*\}/g," \\[lemma\\]Lemma \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*lemma\s*\}/g," \\[endlemma\\] \\[ ");
 
-                  str[i] = str[i].replace(/\\begin\s*\{\s*corollary\s*\}/g," \\[corollary\\]Corollary \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*corollary\s*\}/g," \\[corollary\\]Corollary \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*corollary\s*\}/g," \\[endcorollary\\] \\[ ");
-          
-                  str[i] = str[i].replace(/\\begin\s*\{\s*proposition\s*\}/g," \\[proposition\\]Proposition \\[ "); 
+
+                  str[i] = str[i].replace(/\\begin\s*\{\s*proposition\s*\}/g," \\[proposition\\]Proposition \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*proposition\s*\}/g," \\[endproposition\\] \\[ ");
 
-                  str[i] = str[i].replace(/\\begin\s*\{\s*example\s*\}/g," \\[example\\]Example \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*example\s*\}/g," \\[example\\]Example \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*example\s*\}/g," \\[endexample\\] \\[ ");
-	           
-                  str[i] = str[i].replace(/\\begin\s*\{\s*exercise\s*\}/g," \\[exercise\\]Exercise \\[ "); 
+
+                  str[i] = str[i].replace(/\\begin\s*\{\s*exercise\s*\}/g," \\[exercise\\]Exercise \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*exercise\s*\}/g," \\[endexercise\\] \\[ ");
 
-                  str[i] = str[i].replace(/\\begin\s*\{\s*thebibliography\s*\}\s*\{\s*\w+\s*\}/g," \\[thebibliography\\]References \\[ "); 
-                  str[i] = str[i].replace(/\\begin\s*\{\s*thebibliography\s*\}/g," \\[thebibliography\\]References \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*thebibliography\s*\}\s*\{\s*\w+\s*\}/g," \\[thebibliography\\]References \\[ ");
+                  str[i] = str[i].replace(/\\begin\s*\{\s*thebibliography\s*\}/g," \\[thebibliography\\]References \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*thebibliography\s*\}/g," \\[endthebibliography\\]References \\[ ");
-		  
 
-                  str[i] = str[i].replace(/\\begin\s*\{\s*proof\s*\}/g," \\[proof\\]Proof: \\[ "); 
+
+                  str[i] = str[i].replace(/\\begin\s*\{\s*proof\s*\}/g," \\[proof\\]Proof: \\[ ");
                   if(isIE) {  //IE is just so weird
                      str[i] = str[i].replace(/\\end\s*\{\s*proof\s*\}/g,"\u220E \\[endproof\\] \\[ ");
-                  } else { 
+                  } else {
                      str[i] = str[i].replace(/\\end\s*\{\s*proof\s*\}/g," \\[endproof\\] \\[ ");
                   }
-		  
+
                   //The frontmatter -- all translated to div's to be handled by CSS
                   str[i] = str[i].replace(/\\title\s*\{\s*([^\}]+)\}/g," \\[title\\] \\[$1 \\[endtitle\\] \\[ ");
                   str[i] = str[i].replace(/\\author\s*\{\s*([^\}]+)\}/g," \\[author\\] \\[$1 \\[endauthor\\] \\[ ");
                   str[i] = str[i].replace(/\\address\s*\{\s*([^\}]+)\}/g," \\[address\\] \\[$1 \\[endaddress\\] \\[ ");
                   str[i] = str[i].replace(/\\date\s*\{\s*([^\}]+)\}/g," \\[date\\] \\[$1 \\[enddate\\] \\[ ");
-                  str[i] = str[i].replace(/\\begin\s*\{\s*keyword\s*\}/g," \\[keyword\\] \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*keyword\s*\}/g," \\[keyword\\] \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*keyword\s*\}/g," \\[endkeyword\\] \\[ ");
-                  str[i] = str[i].replace(/\\begin\s*\{\s*abstract\s*\}/g," \\[abstract\\] \\[ "); 
+                  str[i] = str[i].replace(/\\begin\s*\{\s*abstract\s*\}/g," \\[abstract\\] \\[ ");
 	              str[i] = str[i].replace(/\\end\s*\{\s*abstract\s*\}/g," \\[endabstract\\] \\[ ");
-		  
+
                   //The rest of the environments -- Users can even "make up their own" -- but it avoids the array and tabular environments
                   str[i] = str[i].replace(/\\begin\s*\{\s*(?!array|tabular)(\w+)\s*\}/g," \\[$1\\] \\[ ");
                   str[i] = str[i].replace(/\\end\s*\{\s*(?!array|tabular)(\w+)\s*\}/g," \\[end$1\\] \\[ ");
 
-                  //Next, we look at section--subsection stuff.  This is nested -- this would be so much better if LaTeX used 
+                  //Next, we look at section--subsection stuff.  This is nested -- this would be so much better if LaTeX used
                   //some type of \begin{sectionhead}...\end{sectionhead} structure
-                  var sectionIndex = str[i].search(/\\section\s*\{\s*[\s\S]+\}/); 
-		  
-                  while(sectionIndex >= 0) { 
+                  var sectionIndex = str[i].search(/\\section\s*\{\s*[\s\S]+\}/);
+
+                  while(sectionIndex >= 0) {
                      str[i] = str[i].replace(/\\section\s*\{/ ," \\[section\\]");
                      var delimcnt = 1;
-                     for(var ii=sectionIndex;ii<str[i].length;ii++) { 
+                     for(var ii=sectionIndex;ii<str[i].length;ii++) {
                         if(str[i].charAt(ii) == "{") { delimcnt++ };
                         if(str[i].charAt(ii) == "}") { delimcnt-- };
-                        if(delimcnt == 0) { 
+                        if(delimcnt == 0) {
                            str[i] = str[i].substring(0,ii)+"\\[ "+str[i].substring(ii+1,str[i].length) ;
                            break;
                         }
                      };
                      sectionIndex = str[i].search(/\\section\s*\{\s*[\s\S]+\}/); //look for next
                   }
-		  
-	              sectionIndex = str[i].search(/\\subsection\s*\{\s*[\s\S]+\}/); 
-		  
-                  while(sectionIndex >= 0) { 
+
+	              sectionIndex = str[i].search(/\\subsection\s*\{\s*[\s\S]+\}/);
+
+                  while(sectionIndex >= 0) {
                      str[i] = str[i].replace(/\\subsection\s*\{/ ," \\[subsection\\]");
                      var delimcnt = 1;
-                     for(var ii=sectionIndex;ii<str[i].length;ii++) { 
+                     for(var ii=sectionIndex;ii<str[i].length;ii++) {
                         if(str[i].charAt(ii) == "{") { delimcnt++ };
                         if(str[i].charAt(ii) == "}") { delimcnt-- };
-                        if(delimcnt == 0) { 
+                        if(delimcnt == 0) {
                            str[i] = str[i].substring(0,ii)+"\\[ "+str[i].substring(ii+1,str[i].length) ;
                            break;
                         }
                      };
                      sectionIndex = str[i].search(/\\subsection\s*\{\s*[\s\S]+\}/); //look for next
                   }
-	
-                  sectionIndex = str[i].search(/\\subsubsection\s*\{\s*[\s\S]+\}/); 
-		  
-                  while(sectionIndex >= 0) { 
+
+                  sectionIndex = str[i].search(/\\subsubsection\s*\{\s*[\s\S]+\}/);
+
+                  while(sectionIndex >= 0) {
                      str[i] = str[i].replace(/\\subsubsection\s*\{/ ," \\[subsubsection\\]");
                      var delimcnt = 1;
-                     for(var ii=sectionIndex;ii<str[i].length;ii++) { 
+                     for(var ii=sectionIndex;ii<str[i].length;ii++) {
                         if(str[i].charAt(ii) == "{") { delimcnt++ };
                         if(str[i].charAt(ii) == "}") { delimcnt-- };
-                        if(delimcnt == 0) { 
+                        if(delimcnt == 0) {
                            str[i] = str[i].substring(0,ii)+"\\[ "+str[i].substring(ii+1,str[i].length) ;
                            break;
                         }
                      };
                      sectionIndex = str[i].search(/\\subsubsection\s*\{\s*[\s\S]+\}/); //look for next
-                   }		  
+                   }
 
-                  var CatToNextEven = "";                                       
-                  //split into alternating text elements and "marked" elements                   
+                  var CatToNextEven = "";
+                  //split into alternating text elements and "marked" elements
                   var strtmp = str[i].split("\\[");
                   //document.write(strtmp[0]);
-                                
+
                   for(var j=0;j<strtmp.length;j++) {
-                     if(j % 2) { 
+                     if(j % 2) {
                         //odd = split on \\]
                         var strtmparray = strtmp[j].split("\\]");
                         switch (strtmparray[0]) {
                            case "section":
                               var nodeTmp = document.createElement("H2");
-                              nodeTmp.className = 'section'; 
-                              //reset counters  
+                              nodeTmp.className = 'section';
+                              //reset counters
                                 sectionCntr++;
                                 for (var div in LaTeXCounter) { LaTeXCounter[div] = 0 };
                               //Create Title of section
@@ -1647,18 +1647,18 @@ function LaTeXpreProcess(thebody) {
                               anchorSpan.appendChild(document.createTextNode(nodeNumString));
                               nodeAnchor.appendChild(anchorSpan);
                               nodeTmp.appendChild(nodeAnchor);
-			      
+
                               var nodeSpan = document.createElement("span");
                               nodeSpan.className = 'section';
                               nodeSpan.appendChild(document.createTextNode(nodeNumString+" "));
                               nodeTmp.appendChild(nodeSpan);
                               nodeTmp.appendChild(document.createTextNode( strtmparray[1] ) );
-                              newFrag.appendChild(nodeTmp);  
+                              newFrag.appendChild(nodeTmp);
                            break;
                            case "subsection":
                               var nodeTmp = document.createElement("H3");
-                              nodeTmp.className = 'subsection'; 
-                              //counters  
+                              nodeTmp.className = 'subsection';
+                              //counters
                                 LaTeXCounter["subsection"]++;
                                 LaTeXCounter["subsubsection"]=0;
                              //Create Title of section
@@ -1670,18 +1670,18 @@ function LaTeXpreProcess(thebody) {
                               anchorSpan.style.display = "none";
                               anchorSpan.appendChild(document.createTextNode(nodeNumString));
                               nodeAnchor.appendChild(anchorSpan);
-                              nodeTmp.appendChild(nodeAnchor);			      
+                              nodeTmp.appendChild(nodeAnchor);
                               var nodeSpan = document.createElement("span");
                               nodeSpan.className = 'subsection';
                               nodeSpan.appendChild(document.createTextNode(nodeNumString+". "));
-                              nodeTmp.appendChild(nodeSpan);			      
+                              nodeTmp.appendChild(nodeSpan);
                               nodeTmp.appendChild(document.createTextNode( strtmparray[1] ) );
-                              newFrag.appendChild(nodeTmp);  
+                              newFrag.appendChild(nodeTmp);
                            break;
                            case "subsubsection":
                               var nodeTmp = document.createElement("H4");
-                              nodeTmp.className = 'subsubsection'; 
-                               //counters  
+                              nodeTmp.className = 'subsubsection';
+                               //counters
                                 LaTeXCounter["subsubsection"]++;
                               //Create Title of section
                               var nodeAnchor = document.createElement("a");
@@ -1692,60 +1692,60 @@ function LaTeXpreProcess(thebody) {
                               anchorSpan.style.display = "none";
                               anchorSpan.appendChild(document.createTextNode(nodeNumString));
                               nodeAnchor.appendChild(anchorSpan);
-                              nodeTmp.appendChild(nodeAnchor);			      
+                              nodeTmp.appendChild(nodeAnchor);
                               var nodeSpan = document.createElement("span");
                               nodeSpan.className = 'subsubsection';
                               nodeSpan.appendChild(document.createTextNode(nodeNumString+". "));
-                              nodeTmp.appendChild(nodeSpan);			      
+                              nodeTmp.appendChild(nodeSpan);
                               nodeTmp.appendChild(document.createTextNode( strtmparray[1] ) );
-                              newFrag.appendChild(nodeTmp);  
+                              newFrag.appendChild(nodeTmp);
                            break;
                            case "href":
                               var nodeTmp = document.createElement("a");
-                              nodeTmp.className = 'LaTeXMathML'; 
+                              nodeTmp.className = 'LaTeXMathML';
                               nodeTmp.href = strtmparray[1];
                               nodeTmp.appendChild(document.createTextNode( strtmparray[2]));
-                              newFrag.appendChild(nodeTmp);                                                                                                                
+                              newFrag.appendChild(nodeTmp);
                            break;
                            case "url":
                               var nodeTmp = document.createElement("a");
-                              nodeTmp.className = 'LaTeXMathML'; 
+                              nodeTmp.className = 'LaTeXMathML';
                               nodeTmp.href = strtmparray[1];
                               nodeTmp.appendChild(document.createTextNode( strtmparray[1]));
-                              newFrag.appendChild(nodeTmp);                             
+                              newFrag.appendChild(nodeTmp);
                            break;
                            case "figure":
                               var nodeTmp = document.createElement("table");
-                              nodeTmp.className = 'figure'; 
+                              nodeTmp.className = 'figure';
                               var FIGtbody = document.createElement("tbody");
- 
+
                               var FIGlbl = strtmparray[1].match(/\\label\s*\{\s*(\w+)\s*\}/);
-                              strtmparray[1]=strtmparray[1].replace(/\\label\s*\{\w+\}/g,"");	
-			      
-                              var capIndex = strtmparray[1].search(/\\caption\s*\{[\s\S]+\}/);  
+                              strtmparray[1]=strtmparray[1].replace(/\\label\s*\{\w+\}/g,"");
+
+                              var capIndex = strtmparray[1].search(/\\caption\s*\{[\s\S]+\}/);
                               var FIGcap = "";
-			      
+
                               if(capIndex >= 0) { // caption may contain other {  } structures -- but not displaymath!!
                                  var tmp = strtmparray[1];
                                  var delimcnt = 0;
                               	 var capstart = -1;
-                                 for(var pos=capIndex;pos<tmp.length;pos++) { 
+                                 for(var pos=capIndex;pos<tmp.length;pos++) {
                                     if(tmp.charAt(pos) == "{") { delimcnt++ };
                                     if(tmp.charAt(pos) == "}") { delimcnt-- };
                                     if(delimcnt == 1 && capstart<0) { capstart = pos+1 };
-                                    if(delimcnt == 0 && capstart>0) { 
-                                       capend = pos-1; 
+                                    if(delimcnt == 0 && capstart>0) {
+                                       capend = pos-1;
                                        FIGcap = tmp.substring(capstart,pos);
-                                       break 
+                                       break
                                     }
                                  }
                               }
-                                                   
+
                               var FIGtr2 = document.createElement("tr");
                               var FIGtd2  = document.createElement("td");
                               FIGtd2.className="caption";
-                  
-                               
+
+
                               var FIGanchor = document.createElement("a");
                               FIGanchor.className = "figure";
                               if(FIGlbl!=null) {  FIGanchor.id = FIGlbl[1]; }
@@ -1754,10 +1754,10 @@ function LaTeXpreProcess(thebody) {
                               var anchorSpan = document.createElement("span");
                               anchorSpan.className = "figure";
                               anchorSpan.style.display = "none";
-                              anchorSpan.appendChild(document.createTextNode(fignmbr));  
-                              FIGanchor.appendChild(anchorSpan); 			     
+                              anchorSpan.appendChild(document.createTextNode(fignmbr));
+                              FIGanchor.appendChild(anchorSpan);
                               FIGtd2.appendChild(FIGanchor);
-			      
+
                               var FIGspan = document.createElement("span");
                               FIGspan.className = "figure"; //For CSS counters, comment this line
                               FIGspan.appendChild(document.createTextNode("Figure "+fignmbr+". " ) );
@@ -1766,7 +1766,7 @@ function LaTeXpreProcess(thebody) {
                               FIGtr2.appendChild(FIGtd2);
                               FIGtbody.appendChild(FIGtr2);
                               var IsSpecial = false;
-			      
+
                               var FIGinfo = strtmparray[1].match(/\\includegraphics\s*\{([^\}]+)\}/);
                               if(FIGinfo==null) { //options not processed, for now
                                  FIGinfo = strtmparray[1].match(/\\includegraphics\s*\[[^\]]*\]\s*\{\s*([^\}]+)\s*\}/);
@@ -1775,7 +1775,7 @@ function LaTeXpreProcess(thebody) {
                                  FIGinfo = strtmparray[1].match(/\\special\s*\{\s*([^\}]+)\}/);
                                  IsSpecial=true //Hook: Later can include "special" graphics commands
                               };
-                         
+
                               if(FIGinfo!=null) { //Caption will be above the image
                                  var FIGtr1 = document.createElement("tr");
                                  var FIGtd1  = document.createElement("td");
@@ -1791,41 +1791,41 @@ function LaTeXpreProcess(thebody) {
                                  FIGtbody.appendChild(FIGtr1);
                               }
                               nodeTmp.appendChild(FIGtbody);
-                              newFrag.appendChild(nodeTmp); 		      
+                              newFrag.appendChild(nodeTmp);
                            break;
-                           case "table": 
+                           case "table":
                               var nodeTmp = document.createElement("table");
                               if(strtmparray[1].search(/\\centering/) >= 0) {
                                  nodeTmp.className = 'LaTeXtable centered';
                                  nodeTmp.align = "center";
                               } else {
-                                 nodeTmp.className = 'LaTeXtable'; 
+                                 nodeTmp.className = 'LaTeXtable';
                               };
                               tableid++;
                               nodeTmp.id = "LaTeXtable"+tableid; //unique id for each table
-                              
+
                               var TABlbl = strtmparray[1].match(/\\label\s*\{\s*(\w+)\s*\}/);
-                              strtmparray[1]=strtmparray[1].replace(/\\label\s*\{\w+\}/g,"");	
-			      
-                              var capIndex = strtmparray[1].search(/\\caption\s*\{[\s\S]+\}/);  
+                              strtmparray[1]=strtmparray[1].replace(/\\label\s*\{\w+\}/g,"");
+
+                              var capIndex = strtmparray[1].search(/\\caption\s*\{[\s\S]+\}/);
                               var TABcap = "";
-			      
+
                               if(capIndex >= 0) { // caption may contain other {  } structures -- but not displaymath!!
-                                 var tmp = strtmparray[1]; 
+                                 var tmp = strtmparray[1];
                                  var delimcnt = 0;
                                  var capstart = -1;
-                                 for(var pos=capIndex;pos<tmp.length;pos++) { 
+                                 for(var pos=capIndex;pos<tmp.length;pos++) {
                                     if(tmp.charAt(pos) == "{") { delimcnt++ };
                                     if(tmp.charAt(pos) == "}") { delimcnt-- };
                                     if(delimcnt == 1 && capstart<0) { capstart = pos+1 };
-                                    if(delimcnt == 0 && capstart>0) { 
-	                                   capend = pos-1; 
+                                    if(delimcnt == 0 && capstart>0) {
+	                                   capend = pos-1;
                            		       TABcap = tmp.substring(capstart,pos);
-								       break 
+								       break
 								    }
 								 }
 			  				  }
-                                                   
+
                               if(TABcap!="") {
                                  var TABtbody = document.createElement("tbody");
                                  var TABcaption = document.createElement("caption");
@@ -1838,10 +1838,10 @@ function LaTeXpreProcess(thebody) {
 						         var anchorSpan = document.createElement("span");
 						         anchorSpan.className = "LaTeXtable";
 						         anchorSpan.style.display = "none";
-						         anchorSpan.appendChild(document.createTextNode(tabnmbr));  
-                                 TABanchor.appendChild(anchorSpan); 			     
+						         anchorSpan.appendChild(document.createTextNode(tabnmbr));
+                                 TABanchor.appendChild(anchorSpan);
 						         TABcaption.appendChild(TABanchor);
-			      
+
 						         var TABspan = document.createElement("span");
                                  TABspan.className = "LaTeXtable"; //For CSS counters, comment this line
                                  TABspan.appendChild(document.createTextNode("Table "+tabnmbr+". " ) );
@@ -1850,18 +1850,18 @@ function LaTeXpreProcess(thebody) {
                                  nodeTmp.appendChild(TABcaption);
 						      }
                               var TABinfo = strtmparray[1].match(/\\begin\s*\{\s*tabular\s*\}([\s\S]+)\\end\s*\{\s*tabular\s*\}/);
-						      if(TABinfo!=null) { 
+						      if(TABinfo!=null) {
 								 var TABtbody = document.createElement('tbody');
 								 var TABrow = null;
 								 var TABcell = null;
 								 var row=0;
 								 var col=0;
-				 
+
 								 var TABalign = TABinfo[1].match(/^\s*\{([^\}]+)\}/);
 								 TABinfo = TABinfo[1].replace(/^\s*\{[^\}]+\}/,"");
 								 TABinfo = TABinfo.replace(/\\hline/g,""); //no horizontal bars
 								 TABalign[1] = TABalign[1].replace(/\|/g,""); //no vertical bars
-								 TABalign[1] = TABalign[1].replace(/\s/g,""); 
+								 TABalign[1] = TABalign[1].replace(/\s/g,"");
 								 TABinfo = TABinfo.split("\\\\"); // into rows
 								 for(row=0;row<TABinfo.length;row++) {
 						            TABrow = document.createElement("tr");
@@ -1888,13 +1888,13 @@ function LaTeXpreProcess(thebody) {
 						         }
 						         nodeTmp.appendChild(TABtbody);
 						      }
-                              newFrag.appendChild(nodeTmp);                                                                                                                  
+                              newFrag.appendChild(nodeTmp);
                            break;
 						   case "logicalbreak":
                               var nodeTmp = document.createElement("p");
-                              nodeTmp.className = strtmparray[1]; 
+                              nodeTmp.className = strtmparray[1];
 						      nodeTmp.appendChild(document.createTextNode("\u00A0"));
-						      newFrag.appendChild(nodeTmp);                                                                                                                  
+						      newFrag.appendChild(nodeTmp);
                            break;
 						   case "appendix":
                               inAppendix=true;
@@ -1905,7 +1905,7 @@ function LaTeXpreProcess(thebody) {
 						      EndDiv.className = "endlistitem";
                               newFrag.appendChild(EndDiv);
 						      var BegDiv = document.createElement("div");
-                              BegDiv.className = "listitem"; 
+                              BegDiv.className = "listitem";
 						      if(strtmparray[1]!=" ") {
                                  var BegSpan = document.createElement("span");
                                  BegSpan.className="listitemmarker";
@@ -1914,37 +1914,37 @@ function LaTeXpreProcess(thebody) {
 								 BegSpan.appendChild(boldBegSpan);
 								 BegDiv.appendChild(BegSpan);
                               }
-						      newFrag.appendChild(BegDiv);                                                                                                                  
+						      newFrag.appendChild(BegDiv);
                            break;
                            case "br":
-                              newFrag.appendChild(document.createElement("br"));                                                                                                                  
+                              newFrag.appendChild(document.createElement("br"));
                            break;
                            case "bibitem":
 						      newFrag.appendChild(document.createElement("br"));
 						      var nodeTmp = document.createElement("a");
- 						      nodeTmp.className = 'bibitem'; 
+ 						      nodeTmp.className = 'bibitem';
   		    			      var nodeSpan = document.createElement("span");
- 						      nodeSpan.className = 'bibitem'; 
+ 						      nodeSpan.className = 'bibitem';
 
 						      bibcntr++;
-			      
-						      var lbl = strtmparray[1].match(/\{\s*(\w+)\s*\}/); 
-						      strtmparray[1] = strtmparray[1].replace(/\s*\{\s*\w+\s*\}/g,"");			     
+
+						      var lbl = strtmparray[1].match(/\{\s*(\w+)\s*\}/);
+						      strtmparray[1] = strtmparray[1].replace(/\s*\{\s*\w+\s*\}/g,"");
 						      strtmparray[1] = strtmparray[1].replace(/^\s*\[/,"");
-						      strtmparray[1] = strtmparray[1].replace(/\s*\]$/,""); 
+						      strtmparray[1] = strtmparray[1].replace(/\s*\]$/,"");
   		    			      strtmparray[1] = strtmparray[1].replace(/^\s+|\s+$/g,"");
 						      //We create a list of id's for the bibitems -- it seemed important at one time??
 						      if(lbl==null) {
 								 biblist[bibcntr] = "bibitem"+bibcntr
 						      } else {
 						         biblist[bibcntr] = lbl[1];
-						      }; 
+						      };
 						      nodeTmp.name = biblist[bibcntr];
 						      nodeTmp.id = biblist[bibcntr];
 						      // We place content into <a> -- access it with \cite, thus allowing appropriate labels!
 						      if(strtmparray[1]!="") {
 								 nodeSpan.appendChild(document.createTextNode(strtmparray[1]));
-                              } else { 
+                              } else {
                                  nodeSpan.appendChild(document.createTextNode("["+bibcntr+"]"));
                               }
 						      nodeTmp.appendChild(nodeSpan);
@@ -1952,22 +1952,22 @@ function LaTeXpreProcess(thebody) {
                            break;
                            case "cite":
                               var nodeTmp = document.createElement("a");
-                              nodeTmp.className = 'cite'; 
+                              nodeTmp.className = 'cite';
                               nodeTmp.name = 'cite';
                               nodeTmp.href = "#"+strtmparray[1];
-                              newFrag.appendChild(nodeTmp);                                                                                                                  
+                              newFrag.appendChild(nodeTmp);
                            break;
                            case "ref":
-                              var nodeTmp = document.createElement("a"); 
-                              nodeTmp.className = 'ref'; 
+                              var nodeTmp = document.createElement("a");
+                              nodeTmp.className = 'ref';
                               nodeTmp.name = 'ref';
                               nodeTmp.href = "#"+strtmparray[1];
-                              newFrag.appendChild(nodeTmp);                                                                                      
+                              newFrag.appendChild(nodeTmp);
                            break;
-                           default : 
+                           default :
                               var nodeTmp = document.createElement("div");
-                              nodeTmp.className = strtmparray[0]; 
-                              if( IsCounter.test(strtmparray[0]) ) { 
+                              nodeTmp.className = strtmparray[0];
+                              if( IsCounter.test(strtmparray[0]) ) {
 								 LaTeXCounter[strtmparray[0]]++;
                                  var nodeAnchor = document.createElement("a");
                                  nodeAnchor.className = strtmparray[0];
@@ -1978,7 +1978,7 @@ function LaTeXpreProcess(thebody) {
 								 anchorSpan.style.display="none";
 								 nodeAnchor.appendChild(anchorSpan);
 								 nodeTmp.appendChild(nodeAnchor);
-				 
+
 								 var nodeSpan = document.createElement("span");
                                  nodeSpan.className = strtmparray[0];
 								 nodeSpan.appendChild(document.createTextNode(strtmparray[1]+" "+divnum+". "));
@@ -2004,7 +2004,7 @@ function LaTeXpreProcess(thebody) {
 								 newFrag.appendChild(endDiv);
                               }
                          }
-                      } else { 
+                      } else {
                       	 //even = text, labels, bf, and italics, and linebreaks, and math -- we now remove the math
                          strtmp[j] = strtmp[j].replace(/\\\$/g,"<per>");
                          strtmp[j] = strtmp[j].replace(/\$([^\$]+)\$/g," \\[$1\\[ ");
@@ -2012,7 +2012,7 @@ function LaTeXpreProcess(thebody) {
                          strtmp[j] = strtmp[j].replace(/\\begin\s*\{\s*math\s*\}([\s\S]+?)\\end\s*\{\s*math\s*\}/g," \\[$1\\[ ");
 
 						 var strtmptmp = strtmp[j].split("\\[");
-                         
+
                          for(var jjj=0;jjj<strtmptmp.length;jjj++) {
                             if(jjj % 2) { //odd = math
                               var nodeTmp = document.createElement("span");
@@ -2020,15 +2020,15 @@ function LaTeXpreProcess(thebody) {
                               nodeTmp.appendChild(document.createTextNode("$"+strtmptmp[jjj]+"$"));
                               newFrag.appendChild(nodeTmp);
                             } else {
-		      			 	  //all other tags will be mapped to span's (most should be font-face tags) with class-names matching the tag name. 
-                              //Exceptions will be textcolor, colorbox, textbf, textit, and emph.  These cannot include any html tags.  
+		      			 	  //all other tags will be mapped to span's (most should be font-face tags) with class-names matching the tag name.
+                              //Exceptions will be textcolor, colorbox, textbf, textit, and emph.  These cannot include any html tags.
 		      			 	    var TagIndex = strtmptmp[jjj].search(/\\\w+/);
-		      			 	    var tmpIndex = TagIndex; 
+		      			 	    var tmpIndex = TagIndex;
 		      			 	    while(tmpIndex>-1) {
-		      			 	       if(/^\\textcolor/.test(strtmptmp[jjj].substring(TagIndex,strtmptmp[jjj].length))) { 
+		      			 	       if(/^\\textcolor/.test(strtmptmp[jjj].substring(TagIndex,strtmptmp[jjj].length))) {
 		      			 	          strtmptmp[jjj] = strtmptmp[jjj].replace(/\\textcolor\s*\{\s*(\w+)\s*\}\s*/," \\[textcolor\\]$1\\]|");
-		      			 	       } else { 
-		      			 	          if(/^\\colorbox/.test(strtmptmp[jjj].substring(TagIndex,strtmptmp[jjj].length))) { 
+		      			 	       } else {
+		      			 	          if(/^\\colorbox/.test(strtmptmp[jjj].substring(TagIndex,strtmptmp[jjj].length))) {
 		      			 	             strtmptmp[jjj] = strtmptmp[jjj].replace(/\\colorbox\s*\{\s*(\w+)\s*\}\s*/," \\[colorbox\\]$1\\]|");
 		      			 	          } else {
 		      			 	             strtmptmp[jjj] = strtmptmp[jjj].substring(0,TagIndex)+strtmptmp[jjj].substring(TagIndex,strtmptmp[jjj].length).replace(/\\\s*(\w+)\s*/," \\[$1\\]|");
@@ -2038,7 +2038,7 @@ function LaTeXpreProcess(thebody) {
 		      			 	       TagIndex++;
 		      			 	       strtmptmp[jjj] = strtmptmp[jjj].replace(/\\\]\|/,"\\] ");
 		      			 	       if(strtmptmp[jjj].charAt(TagIndex) == "{") {
-		      			 	          strtmptmp[jjj] = strtmptmp[jjj].substring(0,TagIndex)+strtmptmp[jjj].substring(TagIndex+1,strtmptmp[jjj].length); 
+		      			 	          strtmptmp[jjj] = strtmptmp[jjj].substring(0,TagIndex)+strtmptmp[jjj].substring(TagIndex+1,strtmptmp[jjj].length);
 		      			 	          var delimcnt = 1;
 		      			 	          for(var kk = TagIndex;kk<strtmptmp[jjj].length;kk++) {
 		      			 	             if(strtmptmp[jjj].charAt(kk) == "{") { delimcnt++ };
@@ -2047,75 +2047,75 @@ function LaTeXpreProcess(thebody) {
 		      			 	          }
 		      			 	             strtmptmp[jjj] = strtmptmp[jjj].substring(0,kk)+"\\[ "+strtmptmp[jjj].substring(kk+1,strtmptmp[jjj].length);
 		      			 	             TagIndex = kk+3;
-		      			 	       } else { 
+		      			 	       } else {
 		      			 	          strtmptmp[jjj] = strtmptmp[jjj].substring(0,TagIndex)+"\\[ "+strtmptmp[jjj].substring(TagIndex+1,strtmptmp[jjj].length);
                                       TagIndex = TagIndex + 3;
                                    }
                                    if(TagIndex<strtmptmp[jjj].length) {
                                       tmpIndex = strtmptmp[jjj].substring(TagIndex,strtmptmp[jjj].length).search(/\\\w+/);
                                    }
-		      			 	       else { 
+		      			 	       else {
 		      			 	          tmpIndex = -1 };
 		      			 	       TagIndex += tmpIndex;
 		      			 	    }
 
-	     	           	 
+
                                 strtmptmp[jjj] = strtmptmp[jjj].replace(/\\\\\s*\\\\/g,"\\\\");
 				         		strtmptmp[jjj] = strtmptmp[jjj].replace(/\\\\/g," \\[br\\] \\[ ");
-						 		strtmptmp[jjj] = strtmptmp[jjj].replace(/\\label\s*\{\s*(\w+)\s*\}/g," \\[label\\]$1\\[ ");			 
+						 		strtmptmp[jjj] = strtmptmp[jjj].replace(/\\label\s*\{\s*(\w+)\s*\}/g," \\[label\\]$1\\[ ");
 						 		var strlbls = strtmptmp[jjj].split("\\[");
-                                
+
                          		for(var jj=0;jj<strlbls.length;jj++) {
                          		   if(jj % 2) { //odd = labels, boldface, and breaks
 						 		     var strtmparray = strlbls[jj].split("\\]");
 						              switch(strtmparray[0]) {
 								        case "textcolor":
-        		                            var nodeTmp = document.createElement("span"); 
+        		                            var nodeTmp = document.createElement("span");
         		                            nodeTmp.className = 'LaTeXColor';
 										    if(IsColorName.test(strtmparray[1].toLowerCase())) {
    										       nodeTmp.style.color=LaTeXColor[strtmparray[1].toLowerCase()];
-										    } else { 
+										    } else {
 										       nodeTmp.style.color=strtmparray[1];
         		                            };
         		                            nodeTmp.appendChild(document.createTextNode(strtmparray[2]));
-        		                            newFrag.appendChild(nodeTmp);                                                                                      
+        		                            newFrag.appendChild(nodeTmp);
         		                         break;
         		                         case "colorbox":
-        		                            var nodeTmp = document.createElement("span"); 
+        		                            var nodeTmp = document.createElement("span");
         		                            nodeTmp.className = 'LaTeXColor';
 										    if(IsColorName.test(strtmparray[1].toLowerCase())) {
    										       nodeTmp.style.background=LaTeXColor[strtmparray[1].toLowerCase()];
-										    } else { 
+										    } else {
 										       nodeTmp.style.background=strtmparray[1];
         		                            };
         		                            nodeTmp.appendChild(document.createTextNode(strtmparray[2]));
-        		                            newFrag.appendChild(nodeTmp);                                                                                      
+        		                            newFrag.appendChild(nodeTmp);
         		                         break;
         		                         case "br":
-								            newFrag.appendChild(document.createElement("br"));                                                                                                                  
+								            newFrag.appendChild(document.createElement("br"));
    								         break;
 					    			     case "label" :
 								           var nodeTmp = document.createElement("a");
 								            nodeTmp.className = 'LaTeXMathMLlabel';
-								            var lblid = strtmparray[1].match(/\s*(\w+)\s*/); 
+								            var lblid = strtmparray[1].match(/\s*(\w+)\s*/);
 								            if(lblid != null) { nodeTmp.id = lblid[1] };
 								            nodeTmp.style.display = "none";
-								            
+
                                             LaTeXCounter['label']++;
                                             var lblnum = makeNumberString(LaTeXCounter['label']);
-				 				            
+
 								            var anchorSpan = document.createElement("span");
 								            anchorSpan.className = 'LaTeXMathMLlabel';
 								            anchorSpan.appendChild(document.createTextNode(lblnum));
 								            anchorSpan.style.display="none";
 								            nodeTmp.appendChild(anchorSpan);
-								            newFrag.appendChild(nodeTmp);					            
+								            newFrag.appendChild(nodeTmp);
 								         break;
         		                         default :
-        		                            var nodeTmp = document.createElement("span"); 
+        		                            var nodeTmp = document.createElement("span");
         		                            nodeTmp.className = strtmparray[0];
         		                            nodeTmp.appendChild(document.createTextNode(strtmparray[1]))
-        		                            newFrag.appendChild(nodeTmp);                                                                                      
+        		                            newFrag.appendChild(nodeTmp);
 					 			       }
 							         } else {
 				     		         newFrag.appendChild(document.createTextNode(strlbls[jj]));
@@ -2125,9 +2125,9 @@ function LaTeXpreProcess(thebody) {
 					 	}
 		      		} // end else for even splits of strtmp
 		  		 }
-	           } 
+	           }
             }; //else sections and labels
-            TheBody.parentNode.replaceChild(newFrag,TheBody); 
+            TheBody.parentNode.replaceChild(newFrag,TheBody);
          } //str nodevalue is not empty
       }
    } // split off recursion
@@ -2137,19 +2137,19 @@ function LaTeXpreProcess(thebody) {
 function LaTeXDivsAndRefs(thebody) {
    var TheBody = thebody;
 
-   var EndDivClass = null; 
+   var EndDivClass = null;
    var AllDivs = TheBody.getElementsByTagName("div");
    var lbl2id = "";
    var lblnode = null;
    for(var i=AllDivs.length-1;i>=0;i--) {
-      EndDivClass = AllDivs[i].className.match(/end\w+/ ); 
+      EndDivClass = AllDivs[i].className.match(/end\w+/ );
       if(EndDivClass!=null) {
-         EndDivClass = EndDivClass[0]; 
+         EndDivClass = EndDivClass[0];
 	 var DivClass = EndDivClass.substring(3,EndDivClass.length);
          var EndDivNode = AllDivs[i];
-         break; 
-      } 
-   }  
+         break;
+      }
+   }
    while(EndDivClass!=null) {
       // TrackBack to Beginning, appending to newfrag as we go
       var newFrag = document.createDocumentFragment();
@@ -2157,27 +2157,27 @@ function LaTeXDivsAndRefs(thebody) {
       var ClassCount = 1; // because of EndDivNode
       while(EndDivNode.previousSibling!=null && ClassCount>0) {
 	 switch(EndDivNode.previousSibling.className) {
-	    case EndDivClass:	 
+	    case EndDivClass:
 	       ClassCount++;
 	       newFrag.insertBefore(EndDivNode.previousSibling,newFrag.firstChild);
 	       break;
-	    case DivClass: 
-	       if(EndDivNode.previousSibling.nodeName=="DIV") { 
+	    case DivClass:
+	       if(EndDivNode.previousSibling.nodeName=="DIV") {
 	          ClassCount-- ;
 		  //Must check to see if we need a label here!
-		 if(lbl2id !="" ) { 
+		 if(lbl2id !="" ) {
 		    EndDivNode.previousSibling.id = lbl2id;
-		    lbl2id = "" 
+		    lbl2id = ""
 		 }
-		 if(ClassCount==0) { 
-	             RootNode = EndDivNode.previousSibling; 
+		 if(ClassCount==0) {
+	             RootNode = EndDivNode.previousSibling;
 		  } else {
 	             newFrag.insertBefore(EndDivNode.previousSibling,newFrag.firstChild);
 		  }
 	       };
 	       break;
            case 'LaTeXMathMLlabel':
-               lbl2id = EndDivNode.previousSibling.id; 
+               lbl2id = EndDivNode.previousSibling.id;
 	          EndDivNode.parentNode.removeChild(EndDivNode.previousSibling);
 	       break;
 	    default:
@@ -2186,45 +2186,45 @@ function LaTeXDivsAndRefs(thebody) {
       }
       RootNode.appendChild(newFrag);
       EndDivNode.parentNode.removeChild(EndDivNode);
-      
+
       //Look for more end div items
       AllDivs = TheBody.getElementsByTagName("DIV");
       for(i=AllDivs.length-1;i>=0;i--) {
          EndDivClass = AllDivs[i].className.match(/end\w+/ );
          if(EndDivClass!=null) {
 	    ClassCount = 0;
-            EndDivClass = EndDivClass[0]; 
+            EndDivClass = EndDivClass[0];
 	    DivClass = EndDivClass.substring(3,EndDivClass.length);
             EndDivNode = AllDivs[i];
 	    RootNode = EndDivNode.parentNode;
-            break; 
-         } 
-       }     
+            break;
+         }
+       }
    } // end while!
-   
-   
 
-   
+
+
+
    var AllDivs = TheBody.getElementsByTagName("div"); //Convert itemize and enumerate to html lists:
    var DIV2LI = null;
-   
+
    for(var i=0;i<AllDivs.length;i++) {
-      if( AllDivs[i].className=="itemize" || AllDivs[i].className=="enumerate" || AllDivs[i].className=="description")  { 
- 	    if(AllDivs[i].className=="itemize") { 
+      if( AllDivs[i].className=="itemize" || AllDivs[i].className=="enumerate" || AllDivs[i].className=="description")  {
+ 	    if(AllDivs[i].className=="itemize") {
 		RootNode = document.createElement("UL");
-            } else { 
+            } else {
 		RootNode = document.createElement("OL");
             }
 	    RootNode.className = 'LaTeXMathML';
 	    if(AllDivs[i].hasChildNodes()) { AllDivs[i].removeChild(AllDivs[i].firstChild) };
 	    while(AllDivs[i].hasChildNodes()) {
-	       if(AllDivs[i].firstChild.hasChildNodes()) { 
+	       if(AllDivs[i].firstChild.hasChildNodes()) {
 		      DIV2LI = document.createElement("LI");
 		   while(AllDivs[i].firstChild.hasChildNodes()) {
 		      DIV2LI.appendChild(AllDivs[i].firstChild.firstChild);
 		  }
 		  if(DIV2LI.firstChild.className=="listitemmarker") {
-		     DIV2LI.style.listStyleType = "none"; 
+		     DIV2LI.style.listStyleType = "none";
 	          }
 		  RootNode.appendChild(DIV2LI)
 	       }
@@ -2233,31 +2233,31 @@ function LaTeXDivsAndRefs(thebody) {
 	    AllDivs[i].appendChild(RootNode);
       }
    }
-	
+
    // From here to 'end for AllAnchors is necessary only because CSS3 is not implemented yet.
    // Once CSS3 target-text is available, this can be done using CSS
    var AllAnchors = TheBody.getElementsByTagName("a");
    for(var i=0;i<AllAnchors.length;i++) {
       if(AllAnchors[i].className == "ref" || AllAnchors[i].className == "cite" ) {
-         var label = AllAnchors[i].href.match(/\#(\w+)/); 
-         if(label!=null) { 
+         var label = AllAnchors[i].href.match(/\#(\w+)/);
+         if(label!=null) {
             var labelNode = document.getElementById(label[1]);
             if(labelNode!=null) {
                var TheSpans = labelNode.getElementsByTagName("SPAN");
-	       if(TheSpans!=null) { 
+	       if(TheSpans!=null) {
 		  var refNode = TheSpans[0].cloneNode(true);
     	          refNode.style.display="inline"
 		  refNode.className = AllAnchors[i].className;
 		  AllAnchors[i].appendChild(refNode);
 		  //break;
-	       }       
+	       }
             }
          }
       }
    } // end for AllAnchors
 
    // Eventually: Collapsible Sections
-   
+
    return TheBody;
 }
 
@@ -2271,48 +2271,48 @@ function translate(spanclassAM) {
      var LaTeXContainers = [];
      var AllContainers = document.getElementsByTagName('*');
      var ExtendName = "";
-    
+
      for (var k = 0,l=0; k < AllContainers.length; k++) {
-        ExtendName = " "+AllContainers[k].className+" ";        
-        if(ExtendName.match(/\sLaTeX\s/)!=null) { 
+        ExtendName = " "+AllContainers[k].className+" ";
+        if(ExtendName.match(/\sLaTeX\s/)!=null) {
            LaTeXContainers[l] = AllContainers[k];
            l++;
         }
-     }; 
-     if(LaTeXContainers.length>0) { 
+     };
+     if(LaTeXContainers.length>0) {
         for(var m=0;m<LaTeXContainers.length;m++) {
            AMbody = LaTeXContainers[m];
            try {
               AMbody = LaTeXDivsAndRefs(LaTeXpreProcess(AMbody)); //
-           } catch(err) { 
+           } catch(err) {
                alert("Unknown Error: Defaulting to Original LaTeXMathML");
            }
            if(AMbody.tagName=="PRE") {
               var PreChilds = document.createDocumentFragment();
-              var DivChilds = document.createElement("DIV"); 
+              var DivChilds = document.createElement("DIV");
               while(AMbody.hasChildNodes()) {
                  DivChilds.appendChild(AMbody.firstChild);
               }
               PreChilds.appendChild(DivChilds);
               AMbody.parentNode.replaceChild(PreChilds,AMbody);
               AMbody = DivChilds; //Leaves empty pre -- may be useful??
-              
+
            }
            AMprocessNode(AMbody, false, spanclassAM);
         }
-     } else { //Default to entire page  
+     } else { //Default to entire page
         AMbody = document.getElementsByTagName("body")[0];
         try {
            AMbody = LaTeXDivsAndRefs(LaTeXpreProcess(AMbody)); //
-        } catch(err) { 
+        } catch(err) {
            alert("Unknown Error: Defaulting to Original LaTeXMathML");
         }
            AMprocessNode(AMbody, false, spanclassAM);
      }
   }
 }
-  
-if (isIE) { 
+
+if (isIE) {
   // avoid adding MathPlayer info explicitly to each webpage
   document.write("<object id=\"mathplayer\"\
   classid=\"clsid:32F66A20-7614-11D4-BD11-00104BD3F987\"></object>");
