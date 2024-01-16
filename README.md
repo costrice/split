@@ -14,8 +14,6 @@ components to estimate lighting.
 
 ## [Project page](https://costrice.github.io/split/) | [Paper](https://camera.pku.edu.cn/Fei_TPAMI23.pdf) | Data
 
----
-
 ## Getting Started
 
 ### Install
