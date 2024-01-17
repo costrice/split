@@ -12,19 +12,27 @@ components to estimate lighting.
 
 ---
 
-## [Project page](https://costrice.github.io/split/) | [Paper](https://camera.pku.edu.cn/Fei_TPAMI23.pdf) | Data
+## [Project page](https://costrice.github.io/split/) | [Paper](https://camera.pku.edu.cn/Fei_TPAMI23.pdf) | [Data](#SPLiT-Faces-and-Light-Dataset)
 
 ## Getting Started
 
-### Install
+### Required Dependencies
 
-We implement SPLiT using PyTorch.
+To run the code successfully, the following dependencies are required:
 
-```
-pip install torch torchvision torchaudio mediapipe antialiased-cnns
-```
+* Python 3.8
+* PyTorch
+* Torchvision
+* OpenCV (cv2)
+* antialiased-cnns
+* tqdm
+* mediapipe (only for face detection)
 
-(Not tested yet, should work)
+You will also need a CUDA-enabled GPU to run the code.
+
+### Tested Configurations
+
+TBA
 
 ### Inference
 
@@ -39,12 +47,15 @@ We have put 2 portrait images from Internet as examples.
 
 #### Pretrained Models
 
-We provide pretrained models of SPLiT, which can be downloaded from [TBA].
-Users should put the model files in `checkpoints/` before running inference.
+We provide pretrained models of SPLiT, which can be downloaded from:
+* [PKU disk link](https://disk.pku.edu.cn/#/link/E2AE5C46989B95D72D44C138610CE928)
+
+Users should put all model files into the `/model_files/` folder before running
+inference.
 
 #### Step 1: Pre-processing
 
-This step finds all image files in the `/images/face` folder, and for each
+This step finds all image files in the `/images/face/` folder, and for each
 image, crops the face region from the portrait image and generates the face
 region mask (without mouth and eyes), if not provided.
 If the face region mask is provided, the face image will not be
@@ -101,10 +112,30 @@ FaceScape dataset and re-render the training images.
 If you want to train our model, please contact us, and we will provide help as
 much as we can.
 
+## SPLiT Faces and Light Dataset
+
+We captured a dataset containing pairs of real portrait images and the
+corresponding HDR environment lighting.
+This dataset contains 66 pairs of 9 human subjects in 11 outdoor scenes and 84
+pairs of 10 human subjects in 9 indoor scenes.
+
+To apply for this dataset, please first fill
+the [End User Licence Agreement](/docs/static/pdfs/SPLiT_Faces_and_Light_Dataset_EULA.pdf)
+and return it to Boxin Shi by email at <shiboxin@pku.edu.cn>.
+Then we will send you the download link of the dataset.
+
 ## Change Log
 
 * 2024/1/18 (expected): Release pre-trained models and testing data
 * 2024/1/16: First release (inference code)
+
+## License
+
+Code: under Apache License 2.0
+
+Pretrained model file: according to license
+of [FaceScape](https://facescape.nju.edu.cn/) which we used to
+train our model, no commercial use is allowed.
 
 ## Citation
 
@@ -129,7 +160,7 @@ If you find SPLiT useful for your work, please consider citing:
 
 ## Contacts
 
-Please contact _feifan_eecs@pku.edu.cn_ or open an issue for any questions or
+Please contact <feifan_eecs@pku.edu.cn> or open an issue for any questions or
 suggestions.
 
 Thanks! :smiley:
