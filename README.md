@@ -20,19 +20,30 @@ components to estimate lighting.
 
 To run the code successfully, the following dependencies are required:
 
-* Python 3.8
+* Python 3
 * PyTorch
 * Torchvision
 * OpenCV (cv2)
 * antialiased-cnns
 * tqdm
+* yacs
 * mediapipe (only for face detection)
+
+For example, you can install the dependencies using pip:
+
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install opencv-python antialiased-cnns tqdm yacs mediapipe
+```
 
 You will also need a CUDA-enabled GPU to run the code.
 
 ### Tested Configurations
 
-TBA
+The inference code has been successfully tested on the following configurations:
+
+* Windows 11, Python 3.9.18, PyTorch 2.1.2 with CUDA 11.8, Torchvision 0.16.2
+* GPU: NVIDIA GeForce RTX 3090 (24GB)
 
 ### Inference
 
@@ -48,6 +59,7 @@ We have put 2 portrait images from Internet as examples.
 #### Pretrained Models
 
 We provide pretrained models of SPLiT, which can be downloaded from:
+
 * [PKU disk link](https://disk.pku.edu.cn/#/link/E2AE5C46989B95D72D44C138610CE928)
 
 Users should put all model files into the `/model_files/` folder before running
@@ -69,10 +81,12 @@ generate the face region mask.
 python 1_preprocess.py
 ```
 
-The results will be put into the `/images/pre_processed/` folder.
-Each portrait image will have three files: `*.png` which is the cropped
-image, `*_mask.png` which is the face region mask,
-, and `*_masked.png` which is the masked face image.
+The results are saved into the `/images/pre_processed/` folder.
+Each portrait image produces 3 files:
+
+* `*.png`: the cropped face image.
+* `*_mask.png`: the face region mask.
+* `*_masked.png`: the masked face image.
 
 Note that the automatic face region mask generation may not be
 very accurate. But it is sufficient for lighting estimation.
@@ -88,6 +102,18 @@ normal as indices.
 python 2_intrinsics_decomp.py
 ```
 
+The results are saved into the `/images/intrinsic/` folder.
+Each portrait image produces 8 files:
+
+* `*_intrA.png`: the diffuse albedo in gamma-corrected sRGB color space.
+* `*_intrN.png`: the surface normal.
+* `*_intrD.hdr`: the HDR diffuse shading.
+* `*_intrS.hdr`: the HDR specular reflection.
+* `*_intrRecon.png`: the reconstructed face image (A*D+S).
+* `*_distM.png`: the distributed mask.
+* `*_distD.hdr`: the distributed diffuse shading.
+* `*_distS.hdr`: the distributed specular reflection.
+
 #### Step 3: Run Lighting Estimation
 
 Spherical Lighting Estimation module takes distributed spherical face
@@ -97,6 +123,18 @@ in the form of mirror balls.
 ```bash
 python 3_lighting_estim.py
 ```
+
+Both indoor and outdoor lighting estimators are run in this step, and
+the results are saved into the `/images/lighting/indoor/`
+and `/images/lighting/outdoor/` folders, respectively.
+Each portrait image produces 3 files for each scene category:
+
+* `*_pred.hdr`: the estimated HDR environment lighting, which can be used to
+  render other objects under the same lighting as the input portrait.
+* `*_ibr_diff.png`: the image of an example diffuse ball rendered under the
+  estimated lighting.
+* `*_ibr_spec.png`: the image of an example glossy ball rendered under the
+  estimated lighting.
 
 ### Training (Not Yet Released)
 
@@ -126,7 +164,7 @@ Then we will send you the download link of the dataset.
 
 ## Change Log
 
-* 2024/1/18 (expected): Release pre-trained models and testing data
+* 2024/1/17: Release pre-trained models and testing real dataset
 * 2024/1/16: First release (inference code)
 
 ## License
