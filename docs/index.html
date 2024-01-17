@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta name="description"
           content="Single Portrait Lighting Estimation via a Tetrad of Face Intrinsics.">
-    <meta name="keywords" content="SPLiT, Lighting Estimation, Intrinsic Decomposition, Human Face">
+    <meta name="keywords"
+          content="SPLiT, Lighting Estimation, Intrinsic Decomposition, Human Face">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SPLiT: Single Portrait Lighting Estimation via a Tetrad of Face Intrinsics</title>
+    <title>SPLiT: Single Portrait Lighting Estimation via a Tetrad of Face
+        Intrinsics</title>
 
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
           rel="stylesheet">
@@ -26,20 +28,23 @@
     <script src="./static/js/bulma-slider.min.js"></script>
     <script src="./static/js/index.js"></script>
     <script type="text/javascript" src="./static/js/LaTeXMathML.js"></script>
-    <link rel="stylesheet" type="text/css" href="./static/js/LaTeXMathML.standardarticle.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./static/js/LaTeXMathML.standardarticle.css"/>
 </head>
 <body>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <a role="button" class="navbar-burger" aria-label="menu"
+           aria-expanded="false">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
     </div>
     <div class="navbar-menu">
-        <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <div class="navbar-start"
+             style="flex-grow: 1; justify-content: center;">
             <a class="navbar-item" href="https://costrice.github.io/">
       <span class="icon">
           <i class="fas fa-home"></i>
@@ -67,9 +72,11 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column has-text-centered">
-                    <h1 class="title is-3 publication-title">SPLiT: Single Portrait Lighting Estimation via a Tetrad of
+                    <h1 class="title is-3 publication-title">SPLiT: Single
+                        Portrait Lighting Estimation via a Tetrad of
                         Face Intrinsics</h1>
-                    <h1 class="title is-4 publication-conference"> IEEE TPAMI 2024.02 </h1>
+                    <h1 class="title is-4 publication-conference"> IEEE TPAMI
+                        2024.02 </h1>
                     <div class="is-size-6 publication-authors">
             <span class="author-block">
               <a href="https://costrice.github.io/">Fan Fei</a><sup>1#</sup>,
@@ -164,12 +171,18 @@
 <section class="hero teaser">
     <div class="container is-max-desktop">
         <div class="hero-body">
-            <img id="teaser" src="./static/images/teaser.png" style="width: 100%; height: auto;">
-            </img>
+            <div style="text-align: center;">
+                <img id="teaser" src="./static/images/teaser.png"
+                     style="width: 50%; height: auto;">
+                </img>
+            </div>
             <h2 class="subtitle has-text-centered">
-                <span class="dnerf">SPLiT</span> estimates a tetrad of face intrinsics (diffuse
-                albedo A, surface normal N, diffuse shading D, and specular reflection
-                S) and uses spherically distributed components to estimate lighting.
+                <span class="dnerf">SPLiT</span> estimates a tetrad of face
+                intrinsics (diffuse
+                albedo A, surface normal N, diffuse shading D, and specular
+                reflection
+                S) and uses spherically distributed components to estimate
+                lighting.
             </h2>
         </div>
     </div>
@@ -184,23 +197,34 @@
                 <h2 class="title is-4">Abstract</h2>
                 <div class="content has-text-justified">
                     <p>
-                        This paper proposes a novel pipeline to estimate a non-parametric environment map with high
+                        This paper proposes a novel pipeline to estimate a
+                        non-parametric environment map with high
                         dynamic range from a single human face image.
                     </p>
                     <p>
-                        Lighting-independent and -dependent intrinsic images of the face are first estimated separately
-                        in a cascaded network. The influence of face geometry on the two lighting-dependent intrinsics,
-                        diffuse shading and specular reflection, are further eliminated by distributing the intrinsics
-                        pixel-wise onto spherical representations using the surface normal as indices. This results in
-                        two representations simulating images of a diffuse sphere and a glossy sphere under the input
-                        scene lighting. Taking into account the distinctive nature of light sources and ambient terms,
-                        we further introduce a two-stage lighting estimator to predict both accurate and realistic
-                        lighting from these two representations. Our model is trained supervisedly on a large-scale and
+                        Lighting-independent and -dependent intrinsic images of
+                        the face are first estimated separately
+                        in a cascaded network. The influence of face geometry on
+                        the two lighting-dependent intrinsics,
+                        diffuse shading and specular reflection, are further
+                        eliminated by distributing the intrinsics
+                        pixel-wise onto spherical representations using the
+                        surface normal as indices. This results in
+                        two representations simulating images of a diffuse
+                        sphere and a glossy sphere under the input
+                        scene lighting. Taking into account the distinctive
+                        nature of light sources and ambient terms,
+                        we further introduce a two-stage lighting estimator to
+                        predict both accurate and realistic
+                        lighting from these two representations. Our model is
+                        trained supervisedly on a large-scale and
                         high-quality synthetic face image dataset.
                     </p>
                     <p>
-                        We demonstrate that our method allows accurate and detailed lighting estimation and intrinsic
-                        decomposition, outperforming state-of-the-art methods both qualitatively and quantitatively on
+                        We demonstrate that our method allows accurate and
+                        detailed lighting estimation and intrinsic
+                        decomposition, outperforming state-of-the-art methods
+                        both qualitatively and quantitatively on
                         real face images.
                     </p>
                 </div>
@@ -216,18 +240,27 @@
                 <div class="content has-text-justified">
                     <p>
                         The pipeline of SPLiT.
-                        The <b>tetrad intrinsic decomposition module</b> predicts the tetrad of face intrinsics $\{
-                        \mathbf{A}, \mathbf{N}, \mathbf{D}, \mathbf{S} \}$ from the input image $\mathbf{I}$ by cascaded
+                        The <b>tetrad intrinsic decomposition module</b>
+                        predicts the tetrad of face intrinsics $\{
+                        \mathbf{A}, \mathbf{N}, \mathbf{D}, \mathbf{S} \}$ from
+                        the input image $\mathbf{I}$ by cascaded
                         networks, $f_\mathrm{AN}$ and $f_\mathrm{DS}$.
-                        The lighting-dependent shading $\{ \mathbf{D}, \mathbf{S} \}$ are distributed onto spherical
-                        representations $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$ using $\mathbf{N}$ as per-pixel
+                        The lighting-dependent shading $\{ \mathbf{D},
+                        \mathbf{S} \}$ are distributed onto spherical
+                        representations $\{ \mathbf{D}^\circ, \mathbf{S}^\circ
+                        \}$ using $\mathbf{N}$ as per-pixel
                         indices.
-                        The <b>spherical lighting estimation module</b> takes $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$
+                        The <b>spherical lighting estimation module</b> takes
+                        $\{ \mathbf{D}^\circ, \mathbf{S}^\circ \}$
                         and the constant normal map $\mathbf{N}^\circ$ as input.
-                        Taking into account the different nature of HDR light sources and ambient lights, it first
-                        estimates light sources and the ambient lights by the light source network $f_\mathrm{src}$,
-                        then enriches realistic textures into the ambient environment by the ambient texture network
-                        $f_\mathrm{amb}$ and the discriminator $f_\mathrm{disc}$ via a generative adversarial network
+                        Taking into account the different nature of HDR light
+                        sources and ambient lights, it first
+                        estimates light sources and the ambient lights by the
+                        light source network $f_\mathrm{src}$,
+                        then enriches realistic textures into the ambient
+                        environment by the ambient texture network
+                        $f_\mathrm{amb}$ and the discriminator $f_\mathrm{disc}$
+                        via a generative adversarial network
                         (GAN) framework.
                     </p>
                 </div>
@@ -241,20 +274,29 @@
                 <h2 class="title is-4">Dataset</h2>
                 <div class="columns is-centered">
                     <div class="column content">
-                        <img src="./static/images/synthetic_dataset.png" style="width: 100%; height: auto;"></img>
+                        <img src="./static/images/synthetic_dataset.png"
+                             style="width: 100%; height: auto;"></img>
                         <div class="content is-centered has-text-centered">
-                            <p>SPLiT is trained and validated on a large-scale and high-quality synthetic face image
-                                dataset containing labels of intrinsic components and lighting. This dataset is built on
-                                the <a href="https://facescape.nju.edu.cn/">FaceScape</a> 3D face dataset.</p>
+                            <p>SPLiT is trained and validated on a large-scale
+                                and high-quality synthetic face image
+                                dataset containing labels of intrinsic
+                                components and lighting. This dataset is built
+                                on
+                                the <a href="https://facescape.nju.edu.cn/">FaceScape</a>
+                                3D face dataset.</p>
                         </div>
                     </div>
                     <div class="column content">
-                        <img src="./static/images/real_dataset.png" style="width: 100%; height: auto;"></img>
+                        <img src="./static/images/real_dataset.png"
+                             style="width: 100%; height: auto;"></img>
                         <div class="content is-centered has-text-centered">
-                            <p>Comparisons are conducted on a test dataset containing real face images and corresponding
+                            <p>Comparisons are conducted on a test dataset
+                                containing real face images and corresponding
                                 ground-truth environment lighting, including <a
-                                        href="http://hdrdb.com/faces/">Laval Face&Lighting
-                                    database</a> and our newly captured dataset.</p>
+                                        href="http://hdrdb.com/faces/">Laval
+                                    Face&Lighting
+                                    database</a> and our newly captured dataset.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -269,15 +311,19 @@
                 <img src='./static/images/comparison.png'></img>
                 <div class="content has-text-justified">
                     <p>
-                        We compare SPLiT on lighting estimation against state-of-the-art methods.
+                        We compare SPLiT on lighting estimation against
+                        state-of-the-art methods.
                         Lighting estimates from left to right:
                         (a) ground truth, (b) SPLiT (ours), (c) SPLiT (ours) w/o
                         $f_\mathrm{amb}$,
-                        (d) <a href="https://augmentedperception.github.io/facelight/">LIDP</a>,
+                        (d) <a
+                            href="https://augmentedperception.github.io/facelight/">LIDP</a>,
                         (e) <a
                             href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Renjiao_Yi_Faces_as_Lighting_ECCV_2018_paper.pdf">FaceProbe</a>,
-                        (f) <a href="https://ieeexplore.ieee.org/document/9320328">HDRLE</a>,
-                        (g) <a href="https://ieeexplore.ieee.org/document/9431726">HyFRIS</a>.
+                        (f) <a
+                            href="https://ieeexplore.ieee.org/document/9320328">HDRLE</a>,
+                        (g) <a
+                            href="https://ieeexplore.ieee.org/document/9431726">HyFRIS</a>.
                         Some entries (indicated as “$\ominus$”) are unavailable.
                     </p>
                 </div>
@@ -291,15 +337,20 @@
                 <h2 class="title is-4">Applications</h2>
                 <div class="columns is-centered">
                     <div class="column content">
-                        <img src="./static/images/object_insertion.jpg" style="width: 100%; height: auto;"></img>
+                        <img src="./static/images/object_insertion.jpg"
+                             style="width: 100%; height: auto;"></img>
                         <div class="content is-centered has-text-centered">
-                            <p>Relighting virtual objects for realistic insertion using the estimated lighting.</p>
+                            <p>Relighting virtual objects for realistic
+                                insertion using the estimated lighting.</p>
                         </div>
                     </div>
                     <div class="column content">
-                        <img src="./static/images/lighting_transfer.jpg" style="width: 100%; height: auto;"></img>
+                        <img src="./static/images/lighting_transfer.jpg"
+                             style="width: 100%; height: auto;"></img>
                         <div class="content is-centered has-text-centered">
-                            <p>Lighting transfer between portraits using the estimated lighting and face intrinsic components.</p>
+                            <p>Lighting transfer between portraits using the
+                                estimated lighting and face intrinsic
+                                components.</p>
                         </div>
                     </div>
                 </div>
@@ -340,10 +391,13 @@
                     <p>
                         This website is licensed under a <a rel="license"
                                                             href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-                        Commons Attribution-ShareAlike 4.0 International License</a>.
+                        Commons Attribution-ShareAlike 4.0 International
+                        License</a>.
                     </p>
                     <p>
-                        The <a href="https://github.com/costrice/split/tree/main/docs">source code</a> of this website
+                        The <a
+                            href="https://github.com/costrice/split/tree/main/docs">source
+                        code</a> of this website
                         is borrowed from
                         <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
                     </p>
