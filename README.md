@@ -60,7 +60,7 @@ We have put 2 portrait images from Internet as examples.
 
 We provide pretrained models of SPLiT, which can be downloaded from:
 
-* [PKU disk link](https://disk.pku.edu.cn/#/link/E2AE5C46989B95D72D44C138610CE928)
+* [Google drive link](https://drive.google.com/file/d/1dAIH7VFnlxWIXn3NXl_L5O76m8g70jTr/view?usp=sharing)
 
 Users should put all model files into the `/model_files/` folder before running
 inference.
