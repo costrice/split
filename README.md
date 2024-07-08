@@ -159,7 +159,7 @@ pairs of 10 human subjects in 9 indoor scenes.
 
 To apply for this dataset, please first fill
 the [End User Licence Agreement](/docs/static/pdfs/SPLiT_Faces_and_Light_Dataset_EULA.pdf)
-and return it to Boxin Shi by email at <shiboxin@pku.edu.cn>.
+and return it to me by email at <feifan_eecs@pku.edu.cn>.
 Then we will send you the download link of the dataset.
 
 ## Change Log
